@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A1538BF-F741-49AF-BA5A-4EDBE97D6F35}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ContabilidadPymes</RootNamespace>
+    <AssemblyName>ContabilidadPymes</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\ClassClientes.cs" />
+    <Compile Include="Clases\ClassFacturas.cs" />
+    <Compile Include="Clases\ClassMensajes.cs" />
+    <Compile Include="Clases\ClassProveedor.cs" />
+    <Compile Include="Clases\Validaciones.cs" />
+    <Compile Include="Controles\Facturas.xaml.cs">
+      <DependentUpon>Facturas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\FacturasDetalles.xaml.cs">
+      <DependentUpon>FacturasDetalles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ReportContribuyente.xaml.cs">
+      <DependentUpon>ReportContribuyente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\FacturaSeries.xaml.cs">
+      <DependentUpon>FacturaSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\ListaContribuyentes.xaml.cs">
+      <DependentUpon>ListaContribuyentes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\VtnEspera.xaml.cs">
+      <DependentUpon>VtnEspera.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnMensajes.xaml.cs">
+      <DependentUpon>vtnMensajes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Clases\ClassCompras.cs" />
+    <Compile Include="Clases\ClassContribuyente.cs" />
+    <Compile Include="Clases\ClassFacturasDetalles.cs" />
+    <Compile Include="Clases\ClassHonorarios.cs" />
+    <Compile Include="Clases\ClassImpuestos.cs" />
+    <Compile Include="Clases\ClassLibros.cs" />
+    <Compile Include="Clases\ClassPagos.cs" />
+    <Compile Include="Clases\ClassVentas.cs" />
+    <Compile Include="Clases\ConexionDataBase.cs" />
+    <Compile Include="Controles\Compras.xaml.cs">
+      <DependentUpon>Compras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ConciliacionesPagos.xaml.cs">
+      <DependentUpon>ConciliacionesPagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Contribuyente.xaml.cs">
+      <DependentUpon>Contribuyente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Honorarios.xaml.cs">
+      <DependentUpon>Honorarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Impuesto.xaml.cs">
+      <DependentUpon>Impuesto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\LibrosHabilitados.xaml.cs">
+      <DependentUpon>LibrosHabilitados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Pagos.xaml.cs">
+      <DependentUpon>Pagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Usuario.xaml.cs">
+      <DependentUpon>Usuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Usuario_Modificar.xaml.cs">
+      <DependentUpon>Usuario_Modificar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Ventas.xaml.cs">
+      <DependentUpon>Ventas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ReferencePath Include="C:\Users\gerso\source\repos\ContabilidadPymes\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll" />
+    <ReferencePath Include="C:\Users\gerso\source\repos\ContabilidadPymes\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll" />
+    <ReferencePath Include="C:\Users\gerso\source\repos\ContabilidadPymes\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll" />
+    <ReferencePath Include="C:\Users\gerso\source\repos\ContabilidadPymes\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.DataAnnotations.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Net.Http.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Security.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Compras.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\ConciliacionesPagos.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Contribuyente.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Facturas.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\FacturasDetalles.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Honorarios.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Impuesto.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\LibrosHabilitados.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Pagos.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\ReportContribuyente.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Usuario.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Usuario_Modificar.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Controles\Ventas.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\MainWindow.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Ventanas\FacturaSeries.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Ventanas\ListaContribuyentes.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Ventanas\VtnEspera.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\Ventanas\vtnMensajes.g.cs" />
+    <Compile Include="C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\obj\Debug\App.g.cs" />
+  </ItemGroup>
+</Project>

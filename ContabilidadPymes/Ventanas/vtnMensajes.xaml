@@ -1,0 +1,29 @@
+﻿<Window x:Class="ContabilidadPymes.Ventanas.vtnMensajes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ContabilidadPymes.Ventanas"
+        mc:Ignorable="d"
+        Title="Mensajes" Height="160" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Grid Background="White">
+        <StackPanel Margin="0 0 0 0" Height="160" Width="300" VerticalAlignment="Top" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" Margin="20 0 0 0" Height="50">                
+                <TextBlock Name="txtTitulo" Margin="0 0 0 0" FontFamily="Arial" Width="200" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center">Mensaje</TextBlock>
+            </StackPanel>
+            <StackPanel Margin="20 0 0 0">
+                <TextBlock FontWeight="UltraLight" HorizontalAlignment="Left" TextAlignment="Justify" Height="45" FontFamily="Arial" FontSize="12" Name="txtMensaje" Margin="0 0 0 0" Width="260">
+                    Contribuyente: 24812897
+                </TextBlock>
+            </StackPanel>
+            <StackPanel Margin="0 18 0 0" >
+                <Button  Name="btn" Click="Button_Click" TabIndex="1" Width="80" Height="30" FontSize="11" HorizontalAlignment="Right"  Margin="0 0 20 0"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    ToolTip="Aceptar">
+                    ACEPTAR
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
