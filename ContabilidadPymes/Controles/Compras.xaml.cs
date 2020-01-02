@@ -174,7 +174,7 @@ namespace ContabilidadPymes.Controles
             if (combo_razon.SelectedValue.ToString() == "" || txt_fecha.Text == "" || txt_tipo_doc.Text == "" || txt_serie.Text == "" || txt_factura.Text == "" || combo_cliente.Text == ""
                 || txt_monto.Text == "")
             {
-                classMensajes.MensajesCortos("Error", "Campos Vasillos");
+                classMensajes.MensajesCortos("Error", "Campos Vacios.");
             }
             else
             {
@@ -220,7 +220,7 @@ namespace ContabilidadPymes.Controles
          
         public void ValidacionBusqueda()
         {
-            if (combo_razon.SelectedValue.ToString() == ""||txt_serie.Text==""||txt_factura.Text==""||combo_cliente.Text=="")
+            if (txt_serie.Text==""||txt_factura.Text==""||combo_cliente.Text=="")
             {
                 classMensajes.MensajesCortos("Error","Campos Vasillos");
             }
@@ -241,7 +241,6 @@ namespace ContabilidadPymes.Controles
                     classMensajes.MensajesCortos("Error", "No existe factura.");
                     ModoBusqueda = true;
                 }
-
             }
         }
 

@@ -108,19 +108,60 @@ namespace ContabilidadPymes.Clases
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
-            if (ds.Tables[0].Rows.Count==0)
+            ventas = Convert.ToDecimal(ds.Tables[0].Rows[0][1].ToString());
+            impuesto = Convert.ToDecimal(ds.Tables[0].Rows[0][2].ToString());
+            multas = Convert.ToDecimal(ds.Tables[0].Rows[0][3].ToString());
+            formulario = ds.Tables[0].Rows[0][4].ToString();
+            acceso = ds.Tables[0].Rows[0][5].ToString();            
+            cnn.Close();
+        }
+
+        public bool RegistroEncontrado()
+        {
+            bool buscar;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("BuscarImpuestos", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (ds.Tables[0].Rows.Count == 0)
             {
-                MessageBox.Show("No se encontro");
+                buscar = false;
             }
             else
             {
-                ventas = Convert.ToDecimal(ds.Tables[0].Rows[0][1].ToString());
-                impuesto = Convert.ToDecimal(ds.Tables[0].Rows[0][2].ToString());
-                multas = Convert.ToDecimal(ds.Tables[0].Rows[0][3].ToString());
-                formulario = ds.Tables[0].Rows[0][4].ToString();
-                acceso = ds.Tables[0].Rows[0][5].ToString();
+                buscar = true;
             }
             cnn.Close();
+            return buscar;
+        }
+
+        public bool ValidacionDuplicadosImpuestos()
+        {
+            bool duplicado;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosImpuesto", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (int.Parse(ds.Tables[0].Rows[0][0].ToString()) >= 1)
+            {
+                duplicado = true;
+            }
+            else
+            {
+                duplicado = false;
+            }
+            cnn.Close();
+            return duplicado;
         }
 
         public DataSet Vista()

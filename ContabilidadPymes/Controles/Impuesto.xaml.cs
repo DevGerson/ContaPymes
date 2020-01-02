@@ -21,9 +21,17 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class Impuesto : UserControl
     {
-        ClassContribuyente classContribuyente = new ClassContribuyente();
-        ClassImpuestos classImpuestos = new ClassImpuestos();
+        #region Variables
+
         bool ModoBusqueda = false;
+        Validaciones validaciones = new Validaciones();
+        ClassMensajes classMensajes = new ClassMensajes();
+        ClassImpuestos classImpuestos = new ClassImpuestos();
+        ClassContribuyente classContribuyente = new ClassContribuyente();
+
+        #endregion
+
+        #region Constructor
 
         public Impuesto()
         {
@@ -31,11 +39,13 @@ namespace ContabilidadPymes.Controles
             CargarComboContribuyentes();
         }
 
+        #endregion
+
+        #region Controles y Eventos
+
         private void Btn_guardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
-            Vista();
+            ValidacionIngresar();
         }
 
         private void Btn_nuevo_Click(object sender, RoutedEventArgs e)
@@ -55,9 +65,7 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_guardar2_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
-            Vista();
+            ValidacionIngresar();
         }
 
         private void Btn_eliminar_Click(object sender, RoutedEventArgs e)
@@ -69,9 +77,7 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_editar_Click(object sender, RoutedEventArgs e)
         {
-            Modificar();
-            LimpiarTxt();
-            Vista();
+            ValidacionModificar();
         }
 
         private void Buscar_Click(object sender, RoutedEventArgs e)
@@ -99,17 +105,7 @@ namespace ContabilidadPymes.Controles
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        //Ingresa los datos
-                        Ingresar();
-                        LimpiarTxt();
-                        //Bloquea los textbox para resaltar los campos a ingresar
-                        BloqueoTxt(false);
-                        BloqueoBusquedaTxt(true);
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
-                        BloqueoBtnGuardar(false);
-                        ModoBusqueda = true;
-                        //Focus en fecha
-                        txt_formulario.Focus();
+                        ValidacionIngresarBusqueda();
                     }
                 }
                 else
@@ -132,11 +128,7 @@ namespace ContabilidadPymes.Controles
                 }
                 else
                 {
-                    ModoBusqueda = false;
-                    Buscar();
-                    BloqueoTxt(true);
-                    BloqueoBtnGuardar(false);
-                    BloqueoBusquedaBtn(true);
+                    ValidacionBusqueda();
                 }
 
             }
@@ -162,83 +154,197 @@ namespace ContabilidadPymes.Controles
             }
         }
 
+        private void Txt_ventas_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionMontos(e);
+        }
 
-        public void Ingresar()
+        private void Txt_impuesto_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionMontos(e);
+        }
+
+        private void Txt_multa_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionMontos(e);
+        }
+
+        private void Txt_formulario_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Txt_acceso_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Btn_contribuyentes_Click(object sender, RoutedEventArgs e)
+        {
+            string d = combo_nit.SelectedValue.ToString();
+            classMensajes.MensajesCortos("NIT", d);
+        }
+
+        #endregion
+
+        #region Funciones
+
+        public void ValidacionIngresar()
         {
             if (txt_ventas.Text=="" || txt_impuesto.Text=="" || txt_multa.Text=="" || txt_formulario.Text=="" || txt_acceso.Text=="")
             {
-                MessageBox.Show("Campos Vacios");
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
             }
             else
             {
-                classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
-                Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
-                classImpuestos.IngresarImpuesto();
+                ClassImpuestos cImpuestos = new ClassImpuestos();
+                cImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                if (cImpuestos.ValidacionDuplicadosImpuestos() == false)
+                {
+                    Ingresar();
+                    LimpiarTxt();
+                    Vista();                    
+                    classMensajes.MensajesCortos("Exito", "Se registro los datos.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro duplicado.");
+                }
             }
-
         }
 
-
-        public void Modificar()
+        public void ValidacionIngresarBusqueda()
         {
             if (txt_ventas.Text == "" || txt_impuesto.Text == "" || txt_multa.Text == "" || txt_formulario.Text == "" || txt_acceso.Text == "")
             {
-                MessageBox.Show("Campos Vacios");
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
             }
             else
             {
-                classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
-                    Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
-                classImpuestos.ModificarImpuesto();
+                ClassImpuestos cImpuestos = new ClassImpuestos();
+                cImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                if (cImpuestos.ValidacionDuplicadosImpuestos() == false)
+                {
+                    //Ingresa los datos
+                    Ingresar();
+                    //Se limpia los Textbox
+                    LimpiarTxt();
+                    //Bloquea los Textbox
+                    BloqueoTxt(false);
+                    //Se desbloqueo los Textbox para su busqueda
+                    BloqueoBusquedaTxt(true);
+                    //Se bloque los buttons para guardar
+                    BloqueoBtnGuardar(false);
+                    //Se pone en Modo Busqueda
+                    ModoBusqueda = true;
+                    //Focus en Textbox formulario
+                    txt_formulario.Focus();
+                    //Mensaje
+                    classMensajes.MensajesCortos("Exito", "Se registro los datos.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro duplicado.");
+                }
             }
         }
 
+        public void ValidacionModificar()
+        {
+            if (txt_ventas.Text == "" || txt_impuesto.Text == "" || txt_multa.Text == "" || txt_formulario.Text == "" || txt_acceso.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+            else
+            {
+                Modificar();
+                LimpiarTxt();
+                Vista();
+
+                BloqueoBusquedaBtn(false);
+                BloqueoBtnGuardar(true);
+                classMensajes.MensajesCortos("Exitos", "Se modifico el registro.");
+            }
+        }
+
+        public void ValidacionEliminar()
+        {
+            if (txt_formulario.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+            else
+            {
+                Eliminar();
+                LimpiarTxt();
+                Vista();
+                BloqueoBusquedaBtn(false);
+                BloqueoBtnGuardar(true);
+                classMensajes.MensajesCortos("Exitos", "Se modifico el registro.");
+            }
+        }
+
+        public void ValidacionBusqueda()
+        {
+            if (txt_formulario.Text != "")
+            {
+                classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                if (classImpuestos.RegistroEncontrado() == true)
+                {
+                    Busqueda();
+                    ModoBusqueda = false;
+                    BloqueoTxt(true);
+                    BloqueoBtnGuardar(false);
+                    BloqueoBusquedaBtn(true);
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "No existe factura.");
+                    ModoBusqueda = true;
+                }
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void Ingresar()
+        {
+            classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
+                Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
+            classImpuestos.IngresarImpuesto();
+        }
+
+        public void Modificar()
+        {
+            classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
+                Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
+            classImpuestos.ModificarImpuesto();
+        }
 
         public void Eliminar()
         {
-            if(txt_formulario.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
-                classImpuestos.EliminarImpuesto();
-            }
+            classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
+            classImpuestos.EliminarImpuesto();
         }
 
-        public void Buscar()
+        public void Busqueda()
         {
-            if (txt_formulario.Text!="")
-            {
-                classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
-                classImpuestos.BuscarImpuesto();
-
-                txt_ventas.Text = classImpuestos.ventas.ToString();
-                txt_impuesto.Text = classImpuestos.impuesto.ToString();
-                txt_multa.Text = classImpuestos.multas.ToString();
-                txt_formulario.Text = classImpuestos.formulario;
-                txt_acceso.Text = classImpuestos.acceso;
-            }
-            else
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-
+            classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
+            classImpuestos.BuscarImpuesto();
+            txt_ventas.Text = classImpuestos.ventas.ToString();
+            txt_impuesto.Text = classImpuestos.impuesto.ToString();
+            txt_multa.Text = classImpuestos.multas.ToString();
+            txt_formulario.Text = classImpuestos.formulario;
+            txt_acceso.Text = classImpuestos.acceso;
         }
 
         public void Vista()
-        {
-            if (combo_nit.Text=="")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                classImpuestos.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
-                VistaData.ItemsSource = null;
-                VistaData.ItemsSource = classImpuestos.Vista().Tables[0].DefaultView;
-            }           
+        {       
+            classImpuestos.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
+            VistaData.ItemsSource = null;
+            VistaData.ItemsSource = classImpuestos.Vista().Tables[0].DefaultView;                      
         }
 
         public void LimpiarTxt()
@@ -295,5 +401,7 @@ namespace ContabilidadPymes.Controles
             combo_nit.DisplayMemberPath = "razon_social";
             combo_nit.SelectedValuePath = "nit";
         }
+
+        #endregion
     }
 }

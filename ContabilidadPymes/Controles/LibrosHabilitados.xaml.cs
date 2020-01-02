@@ -22,10 +22,18 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class LibrosHabilitados : UserControl
     {
-        ClassLibros classLibros = new ClassLibros();
-        ClassContribuyente classContribuyente = new ClassContribuyente();
+        #region Variables y Constantes
+
         DateTime fecha, fecha2;
-        bool ModoBusqueda=false;
+        bool ModoBusqueda = false;
+        ClassLibros classLibros = new ClassLibros();
+        Validaciones validaciones = new Validaciones();
+        ClassMensajes classMensajes = new ClassMensajes();        
+        ClassContribuyente classContribuyente = new ClassContribuyente();
+
+        #endregion
+
+        #region Constructor
 
         public LibrosHabilitados()
         {
@@ -33,45 +41,28 @@ namespace ContabilidadPymes.Controles
             CargarComboContribuyentes();
         }
 
+        #endregion
+
+        #region Eventos y Controles
+
         private void Btn_nuevo_Click(object sender, RoutedEventArgs e)
         {
-            BloqueoTxt(true);            
+            BloqueoTxt(true);
             BloqueoBtn(true);
             BloqueoBusquedaBtn(false);
             LimpiarTxt();
             ModoBusqueda = false;
-
+            txt_fecha.Focus();
         }
 
         private void Btn_guardar2_Click(object sender, RoutedEventArgs e)
         {
-            if (txt_fecha.Text=="" || txt_hojas.Text=="" || txt_tipo.Text=="" ||txt_resolucion.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                Ingresar();
-                LimpiarTxt();
-                VistaLibros();
-            }
-
+            ValidacionIngresar();
         }
 
         private void Btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
-            if (combo_nit.Text == "" || txt_resolucion.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                Eliminar();
-                LimpiarTxt();
-                VistaLibros();
-                BloqueoBusquedaBtn(false);
-                BloqueoBtnGuardar(true);
-            }
+            ValidacionEliminar();
 
         }
 
@@ -93,29 +84,16 @@ namespace ContabilidadPymes.Controles
                     MessageBoxResult messageBoxResult = MessageBox.Show("Se perderan los datos si no ha guardado. ¿Desea Guardar los datos?", "Buscar", boxButton);
                     if (messageBoxResult == MessageBoxResult.No)
                     {
-                        //Bloquea los textbox para resaltar los campos a ingresar
                         BloqueoTxt(false);
                         BloqueoBusquedaTxt(true);
                         LimpiarTxt();
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
                         BloqueoBtnGuardar(false);
                         ModoBusqueda = true;
-                        //Focus en Fecha
                         txt_resolucion.Focus();
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        //Ingresa los datos
-                        Ingresar();
-                        LimpiarTxt();
-                        //Bloquea los textbox para resaltar los campos a ingresar
-                        BloqueoTxt(false);
-                        BloqueoBusquedaTxt(true);
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
-                        BloqueoBtnGuardar(false);
-                        ModoBusqueda = true;
-                        //Focus en fecha
-                        txt_resolucion.Focus();
+                        ValidacionIngresarBusqueda();
                     }
                 }
                 else
@@ -131,18 +109,14 @@ namespace ContabilidadPymes.Controles
             else if (ModoBusqueda == true)
             {
                 //Si el modo busqueda es true entonecs verificara si hay campos vacios
-                if (txt_resolucion.Text=="")
+                if (txt_resolucion.Text == "")
                 {
                     ModoBusqueda = false;
                     BloqueoTxt(true);
                 }
                 else
                 {
-                    ModoBusqueda = false;
-                    Buscar();
-                    BloqueoTxt(true);
-                    BloqueoBtnGuardar(false);
-                    BloqueoBusquedaBtn(true);
+                    ValidacionBusqueda();
                 }
 
             }
@@ -150,30 +124,12 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_editar_Click(object sender, RoutedEventArgs e)
         {
-            if (combo_nit.Text == "" || txt_fecha.Text == "" || txt_hojas.Text == "" || txt_tipo.Text == "" || txt_resolucion.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                Modificar();
-                LimpiarTxt();
-                VistaLibros();
-                BloqueoBusquedaBtn(false);
-                BloqueoBtnGuardar(true);
-            }
+            ValidacionModificar();
         }
 
         private void Btn_vista_Click(object sender, RoutedEventArgs e)
         {
-            if (combo_nit.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                VistaLibros();
-            }
+            VistaLibros();
         }
 
         private void Combo_nit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -193,19 +149,148 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_guardar_Click(object sender, RoutedEventArgs e)
         {
+            ValidacionIngresar();
+        }
+
+        private void Txt_fecha_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionFechas(e);
+        }
+
+        private void Txt_hojas_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Txt_resolucion_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        #endregion
+
+        #region Funciones
+
+        public void ValidacionIngresar()
+        {
             if (txt_fecha.Text == "" || txt_hojas.Text == "" || txt_tipo.Text == "" || txt_resolucion.Text == "")
             {
-                MessageBox.Show("Campos Vacios");
+                classMensajes.MensajesCortos("Error","Campos vacios.");
             }
             else
             {
-                Ingresar();
-                LimpiarTxt();
-                VistaLibros();
+                ClassLibros cLibros = new ClassLibros();
+                cLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                if (cLibros.ValidacionDuplicadosLibros() == false)
+                {
+                    Ingresar();
+                    LimpiarTxt();
+                    VistaLibros();
+
+                    classMensajes.MensajesCortos("Exito", "Se Ingreso .");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro Duplicada");
+                }
+
             }
         }
 
-        #region Funciones
+        public void ValidacionIngresarBusqueda()
+        {
+            if (txt_fecha.Text == "" || txt_hojas.Text == "" || txt_tipo.Text == "" || txt_resolucion.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+            else
+            {
+                ClassLibros cLibros = new ClassLibros();
+                cLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                if (cLibros.ValidacionDuplicadosLibros() == false)
+                {
+                    //Proceso de Ingresar
+                    Ingresar();
+                    //Limpia los Textbox
+                    LimpiarTxt();
+                    //Bloquea los Textbox
+                    BloqueoTxt(false);
+                    //Desbloque los Textbox para su busqueda
+                    BloqueoBusquedaTxt(true);
+                    //Bloquea los Buttons de guardar
+                    BloqueoBtnGuardar(false);
+                    //Se pone en modo Busqueda
+                    ModoBusqueda = true;
+                    //Focus en fecha
+                    txt_resolucion.Focus();
+                    //Mensaje de alerta
+                    classMensajes.MensajesCortos("Exito", "Se Ingreso.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro Duplicada");
+                }
+            }
+        }
+
+        public void ValidacionModificar()
+        {
+            if (combo_nit.Text == "" || txt_fecha.Text == "" || txt_hojas.Text == "" || txt_tipo.Text == "" || txt_resolucion.Text == "")
+            {
+                classMensajes.MensajesCortos("Exito", "Se modifico la factura.");
+            }
+            else
+            {
+                Modificar();
+                LimpiarTxt();
+                VistaLibros();
+                BloqueoBusquedaBtn(false);
+                BloqueoBtnGuardar(true);
+            }
+        }
+
+        public void ValidacionEliminar()
+        {
+            if (combo_nit.Text == "" || txt_resolucion.Text == "")
+            {
+                classMensajes.MensajesCortos("Exito", "Se elimino la factura.");
+            }
+            else
+            {
+                Eliminar();
+                LimpiarTxt();
+                VistaLibros();
+                BloqueoBusquedaBtn(false);
+                BloqueoBtnGuardar(true);
+            }
+        }
+
+        public void ValidacionBusqueda()
+        {
+            if (txt_resolucion.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos Vasillos");
+            }
+            else
+            {
+                classLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                if (classLibros.FacturaEncontrada() == true)
+                {
+                    Busqueda();
+
+                    BloqueoTxt(true);
+                    BloqueoBtnGuardar(false);
+                    BloqueoBusquedaBtn(true);
+                    ModoBusqueda = false;
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "No existe factura.");
+                    ModoBusqueda = true;
+                }
+
+            }
+        }
 
         public void Ingresar()
         {
@@ -229,7 +314,7 @@ namespace ContabilidadPymes.Controles
             classLibros.Eliminar();
         }
 
-        public void Buscar()
+        public void Busqueda()
         {
             classLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_resolucion.Text.Trim());
             classLibros.Buscar();
@@ -272,6 +357,7 @@ namespace ContabilidadPymes.Controles
             btn_editar.IsEnabled = Estado;
             btn_buscar.IsEnabled = Estado;
             btn_vista.IsEnabled = Estado;
+            btn_contribuyentes.IsEnabled = Estado;
         }
 
         public void CargarComboContribuyentes()
@@ -292,14 +378,18 @@ namespace ContabilidadPymes.Controles
             btn_eliminar.IsEnabled = Estado;
         }
 
+        private void Btn_contribuyentes_Click(object sender, RoutedEventArgs e)
+        {
+            string d = combo_nit.SelectedValue.ToString();
+            classMensajes.MensajesCortos("NIT", d);
+        }
+
         public void BloqueoBtnGuardar(bool Estado)
         {
             btn_guardar.IsEnabled = Estado;
             btn_guardar2.IsEnabled = Estado;
         }
 
-
         #endregion
-
     }
 }

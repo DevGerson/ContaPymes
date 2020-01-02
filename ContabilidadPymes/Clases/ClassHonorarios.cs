@@ -129,6 +129,29 @@ namespace ContabilidadPymes.Clases
             return Verificar;
         }
 
+        public bool ValidacionDuplicadosHonorarios()
+        {
+            bool duplicado;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosHonorarios", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (int.Parse(ds.Tables[0].Rows[0][0].ToString()) >= 1)
+            {
+                duplicado = true;
+            }
+            else
+            {
+                duplicado = false;
+            }
+            cnn.Close();
+            return duplicado;
+        }
+
 
 
     }

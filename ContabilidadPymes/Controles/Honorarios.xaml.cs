@@ -21,8 +21,16 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class Honorarios : UserControl
     {
-        ClassContribuyente classContribuyente = new ClassContribuyente();
+        #region Variables
+
+        Validaciones validaciones = new Validaciones();
+        ClassMensajes classMensajes = new ClassMensajes();
         ClassHonorarios classHonorarios = new ClassHonorarios();
+        ClassContribuyente classContribuyente = new ClassContribuyente();
+
+        #endregion
+
+        #region Constructor
 
         public Honorarios()
         {
@@ -31,43 +39,28 @@ namespace ContabilidadPymes.Controles
             Vista();
         }
 
+        #endregion
+
+        #region Controles y Eventos
+
         private void Btn_guardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            Vista();
-
-            BloqueoBtnGuardar(false);
-            BloqueoBusquedaBtn(true);
+            ValidacionIngresar();
         }
 
         private void Btn_guardar2_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            Vista();
-
-            Buscar();
-
-            BloqueoBtnGuardar(false);
-            BloqueoBusquedaBtn(true);
+            ValidacionIngresar();
         }
 
         private void Btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
             Eliminar();
-            LimpiarTxt();
-            Vista();
-
-            BloqueoBusquedaBtn(false);
-            BloqueoBtnGuardar(true);
         }
 
         private void Btn_editar_Click(object sender, RoutedEventArgs e)
         {
-            Editar();            
-            Vista();
-
-            BloqueoBtnGuardar(false);
-            BloqueoBusquedaBtn(true);
+            ValidacionEditar();         
         }
 
         private void Btn_refresh_Click(object sender, RoutedEventArgs e)
@@ -75,36 +68,114 @@ namespace ContabilidadPymes.Controles
             Vista();
         }
 
-        public void Ingresar()
+        private void Combo_nit_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (txt_honorario.Text=="")
+            if (combo_nit.SelectedIndex >= 0)
             {
-                MessageBox.Show("Campos Vacios");
+                BloqueoTxt(true);
+                BloqueoBtn(true);
+                BloqueoBusquedaBtn(true);
+                LimpiarTxt();
+                Buscar();
+                if (txt_honorario.Text == "")
+                {
+                    BloqueoBtnGuardar(true);
+                    BloqueoBusquedaBtn(false);
+                }
+                else
+                {
+                    BloqueoBtnGuardar(false);
+                    BloqueoBusquedaBtn(true);
+                }
             }
             else
             {
-                classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()),Convert.ToDecimal(txt_honorario.Text.Trim()));
-                classHonorarios.Ingresar();
+                BloqueoTxt(false);
+                BloqueoBtn(false);
             }
+        }
+
+        private void Txt_honorario_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionMontos(e);
+        }
+
+        private void Btn_contribuyentes_Click(object sender, RoutedEventArgs e)
+        {
+            string d = combo_nit.SelectedValue.ToString();
+            classMensajes.MensajesCortos("NIT", d);
+        }
+
+        #endregion
+
+        #region Funciones
+
+        public void ValidacionIngresar()
+        {
+            if (txt_honorario.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+            else
+            {
+                ClassHonorarios cHonorarios = new ClassHonorarios();
+                cHonorarios.ParametrosVista(int.Parse(combo_nit.SelectedValue.ToString()));
+                if (cHonorarios.ValidacionDuplicadosHonorarios()==false)
+                {
+                    Ingresar();
+                    Vista();
+                    Buscar();
+                    BloqueoBtnGuardar(false);
+                    BloqueoBusquedaBtn(true);
+                    classMensajes.MensajesCortos("Exito", "Registro guardado.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error","Registro duplicado.");
+                }
+
+            }
+        }
+
+        public void ValidacionEditar()
+        {
+            if (txt_honorario.Text == "")
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+            else
+            {
+                Editar();
+                Buscar();
+                Vista();
+                BloqueoBtnGuardar(false);
+                BloqueoBusquedaBtn(true);
+
+                classMensajes.MensajesCortos("Exito", "Registro modificado.");
+            }
+        }
+
+        public void Ingresar()
+        {
+            classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_honorario.Text.Trim()));
+            classHonorarios.Ingresar();
         }
 
         public void Editar()
         {
-            if (txt_honorario.Text == "")
-            {
-                MessageBox.Show("Campos Vacios");
-            }
-            else
-            {
-                classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_honorario.Text.Trim()));
-                classHonorarios.Modificar();
-            }
+            classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_honorario.Text.Trim()));
+            classHonorarios.Modificar();
         }
 
         public void Eliminar()
         {
             classHonorarios.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
-            classHonorarios.Eliminar();            
+            classHonorarios.Eliminar();
+            Vista();
+            LimpiarTxt();
+            BloqueoBtnGuardar(true);
+            BloqueoBusquedaBtn(false);
+            classMensajes.MensajesCortos("Exito", "Registro eliminado.");
         }
 
         public void Buscar()
@@ -118,6 +189,9 @@ namespace ContabilidadPymes.Controles
             {
                 classHonorarios.Buscar();
                 txt_honorario.Text = classHonorarios.honorario.ToString();
+                Vista();
+                BloqueoBusquedaBtn(false);
+                BloqueoBtnGuardar(true);
             }           
         }
 
@@ -171,31 +245,6 @@ namespace ContabilidadPymes.Controles
             combo_nit.SelectedValuePath = "nit";
         }
 
-        private void Combo_nit_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (combo_nit.SelectedIndex >= 0)
-            {
-                BloqueoTxt(true);
-                BloqueoBtn(true);
-                BloqueoBusquedaBtn(true);
-                LimpiarTxt();
-                Buscar();
-                if (txt_honorario.Text=="")
-                {
-                    BloqueoBtnGuardar(true);
-                    BloqueoBusquedaBtn(false);
-                }
-                else
-                {
-                    BloqueoBtnGuardar(false);
-                    BloqueoBusquedaBtn(true);
-                }
-            }
-            else
-            {
-                BloqueoTxt(false);
-                BloqueoBtn(false);
-            }
-        }
+        #endregion
     }
 }

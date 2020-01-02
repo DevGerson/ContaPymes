@@ -80,7 +80,7 @@
                         Click="Btn_refrescar_Click"
                         ToolTip="Nomenclatura Cuentas">
                         <materialDesign:PackIcon
-                            Kind="FormatListBulleted" />
+                            Kind="Refresh" />
                     </Button>
                     <Button
                         IsEnabled="False"
@@ -139,6 +139,7 @@
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                         </ComboBox>
                         <Button
+                            Click="Btn_contribuyentes_Click"
                             TabIndex="16"                            
                             IsEnabled="False"
                             Name="btn_contribuyentes"
@@ -173,6 +174,8 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Horizontal" Margin="50 0 0 0">
                     <TextBox
+                        TextAlignment="Right"
+                        PreviewTextInput="Txt_ventas_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_ventas"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -194,6 +197,8 @@
                     </TextBox>
 
                     <TextBox
+                        TextAlignment="Right"
+                        PreviewTextInput="Txt_impuesto_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_impuesto"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -215,6 +220,8 @@
                     </TextBox>
 
                     <TextBox
+                        TextAlignment="Right"
+                        PreviewTextInput="Txt_multa_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_multa"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -235,6 +242,7 @@
                         </materialDesign:HintAssist.Hint>
                     </TextBox>
                     <TextBox
+                        PreviewTextInput="Txt_formulario_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_formulario"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -256,6 +264,7 @@
                     </TextBox>
 
                     <TextBox
+                        PreviewTextInput="Txt_acceso_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_acceso"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -297,9 +306,30 @@
                 <StackPanel Margin="50 20 0 0" Width="1250" HorizontalAlignment="Left">
                     <DataGrid Name="VistaData" AutoGenerateColumns="False" Background="#f2f2f2">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Path=ventas}" Header="Ventas" Width="120"/>
-                            <DataGridTextColumn Binding="{Binding Path=impuesto}" Header="Impuesto" Width="150"/>
-                            <DataGridTextColumn Binding="{Binding Path=multa}" Header="Multa" Width="100"/>
+                            <DataGridTextColumn Binding="{Binding Path=ventas,StringFormat=N2}" Header="Ventas" Width="120">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Path=impuesto,StringFormat=N2}" Header="Impuesto" Width="150">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Path=multa,StringFormat=N2}" Header="Multa" Width="100">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style>
+                                        <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+                                        <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Binding="{Binding Path=formulario}" Header="Formulario" Width="200"/>
                             <DataGridTextColumn Binding="{Binding Path=acceso}" Header="Acceso" Width="150"/>
                         </DataGrid.Columns>

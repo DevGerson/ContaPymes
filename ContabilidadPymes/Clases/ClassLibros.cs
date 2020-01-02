@@ -110,6 +110,54 @@ namespace ContabilidadPymes.Clases
             cnn.Close();
         }
 
+        public bool FacturaEncontrada()
+        {
+            bool buscar;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("BuscarLibros", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                buscar = false;
+            }
+            else
+            {
+                buscar = true;
+            }
+            cnn.Close();
+            return buscar;
+        }
+
+        public bool ValidacionDuplicadosLibros()
+        {
+            bool duplicado;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosLibros", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (int.Parse(ds.Tables[0].Rows[0][0].ToString()) >= 1)
+            {
+                duplicado = true;
+            }
+            else
+            {
+                duplicado = false;
+            }
+            cnn.Close();
+            return duplicado;
+        }
+
         public DataSet Vista()
         {
             SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
