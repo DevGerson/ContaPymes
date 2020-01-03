@@ -151,6 +151,7 @@ namespace ContabilidadPymes.Controles
                 BloqueoBtn(true);
                 BloqueoBusquedaBtn(false);
                 ListTipos();
+                combo_serie.ItemsSource = null;
                 combo_serie.Items.Clear();
             }
             else
@@ -208,7 +209,7 @@ namespace ContabilidadPymes.Controles
             {
                 if (txt_Exento.IsChecked == false)
                 {
-                    classVentas.BuscarVentas(int.Parse(combo_razon.SelectedValue.ToString()), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
+                    classVentas.BuscarVentas(combo_razon.SelectedValue.ToString(), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
                     if (classVentas.ValidacionDuplicadosVentas() == false)
                     {
                         //Ingresa la factura a la bd
@@ -238,7 +239,7 @@ namespace ContabilidadPymes.Controles
                 }
                 else
                 {
-                    classVentas.BuscarVentas(int.Parse(combo_razon.SelectedValue.ToString()), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
+                    classVentas.BuscarVentas(combo_razon.SelectedValue.ToString(), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
                     if (classVentas.ValidacionDuplicadosVentas() == false)
                     {
                         //Ingresa la factura exenta a la bd
@@ -280,7 +281,7 @@ namespace ContabilidadPymes.Controles
             {
                 if (txt_Exento.IsChecked == false)
                 {
-                    classVentas.BuscarVentas(int.Parse(combo_razon.SelectedValue.ToString()), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
+                    classVentas.BuscarVentas(combo_razon.SelectedValue.ToString(), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
                     if (classVentas.ValidacionDuplicadosVentas()==false)
                     {
                         Ingresar();
@@ -299,7 +300,7 @@ namespace ContabilidadPymes.Controles
                 }
                 else
                 {
-                    classVentas.BuscarVentas(int.Parse(combo_razon.SelectedValue.ToString()), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
+                    classVentas.BuscarVentas(combo_razon.SelectedValue.ToString(), combo_serie.SelectedValue.ToString(), int.Parse(txt_factura.Text.Trim()));
                     if (classVentas.ValidacionDuplicadosVentas() == false)
                     {
                         IngresarExento();
@@ -327,7 +328,7 @@ namespace ContabilidadPymes.Controles
             }
             else
             {
-                classVentas.BuscarVentas(int.Parse(combo_razon.SelectedValue.ToString()),combo_serie.SelectedValue.ToString(),int.Parse(txt_factura.Text.Trim()));
+                classVentas.BuscarVentas(combo_razon.SelectedValue.ToString(),combo_serie.SelectedValue.ToString(),int.Parse(txt_factura.Text.Trim()));
                 if (classVentas.ExisteFactura()==true)
                 {
                     Busqueda();
@@ -410,8 +411,8 @@ namespace ContabilidadPymes.Controles
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
 
-            classVentas.NuevaVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
-            Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), monto, 0, Iva);
+            classVentas.NuevaVentas(combo_razon.SelectedValue.ToString().Trim(), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
+            combo_cliente.SelectedValue.ToString().Trim(), monto, 0, Iva);
             classVentas.Ingresar();
         }
 
@@ -421,8 +422,8 @@ namespace ContabilidadPymes.Controles
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
 
-            classVentas.NuevaVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
-            Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), 0, monto, 0);
+            classVentas.NuevaVentas(combo_razon.SelectedValue.ToString().Trim(), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
+            combo_cliente.SelectedValue.ToString().Trim(), 0, monto, 0);
             classVentas.Ingresar();
         }
 
@@ -432,8 +433,8 @@ namespace ContabilidadPymes.Controles
             decimal Iva = Convert.ToDecimal(txt_Monto.Text.Trim()) * Convert.ToDecimal(0.05);
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-            classVentas.NuevaVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
-                Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), monto, 0, Iva);
+            classVentas.NuevaVentas(combo_razon.SelectedValue.ToString().Trim(), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
+                combo_cliente.SelectedValue.ToString().Trim(), monto, 0, Iva);
             classVentas.Modificar();
 
         }
@@ -443,20 +444,20 @@ namespace ContabilidadPymes.Controles
             decimal monto = Convert.ToDecimal(txt_Monto.Text.Trim());
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-            classVentas.NuevaVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
-                Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), 0, monto, 0);
+            classVentas.NuevaVentas(combo_razon.SelectedValue.ToString().Trim(), fecha2, txt_tipoDoc.Text.Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()),
+                combo_cliente.SelectedValue.ToString().Trim(), 0, monto, 0);
             classVentas.Modificar();
         }
            
         public void Eliminar()
         {
-            classVentas.BuscarVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
+            classVentas.BuscarVentas(combo_razon.SelectedValue.ToString().Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
             classVentas.Eliminar();
         }
 
         public void Busqueda()
         {
-            classVentas.BuscarVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
+            classVentas.BuscarVentas(combo_razon.SelectedValue.ToString().Trim(), combo_serie.SelectedValue.ToString().Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
             classVentas.Buscar();
 
             txt_fecha.Text = classVentas.fecha.ToString("dd/MM/yyyy");
@@ -489,7 +490,7 @@ namespace ContabilidadPymes.Controles
 
         public void Vista()
         {
-            classVentas.ParametroVistaVentas(Convert.ToInt32(combo_razon.SelectedValue.ToString()));
+            classVentas.ParametroVistaVentas(combo_razon.SelectedValue.ToString());
             VistaVentas.ItemsSource = null;
             VistaVentas.ItemsSource = classVentas.VistaFacturaVentas().Tables[0].DefaultView;
         }
@@ -553,8 +554,9 @@ namespace ContabilidadPymes.Controles
 
         public void ListTipos()
         {
+            txt_tipoDoc.ItemsSource = null;
             txt_tipoDoc.Items.Clear();
-            classFacturasDetalles.ParametrosVista(int.Parse(combo_razon.SelectedValue.ToString()));
+            classFacturasDetalles.ParametrosVista(combo_razon.SelectedValue.ToString());
             txt_tipoDoc.ItemsSource = classFacturasDetalles.ListTipos().Tables[0].DefaultView;
             txt_tipoDoc.DisplayMemberPath = "tipo_doc";
             txt_tipoDoc.SelectedValuePath = "tipo_doc";
@@ -562,7 +564,7 @@ namespace ContabilidadPymes.Controles
 
         public void ListSeries()
         {
-            classFacturasDetalles.ParametrosListSeries(int.Parse(combo_razon.SelectedValue.ToString()), txt_tipoDoc.Text);
+            classFacturasDetalles.ParametrosListSeries(combo_razon.SelectedValue.ToString(), txt_tipoDoc.Text);
             combo_serie.ItemsSource = classFacturasDetalles.ListSeries().Tables[0].DefaultView;
             combo_serie.DisplayMemberPath = "serie";
             combo_serie.SelectedValuePath = "serie";

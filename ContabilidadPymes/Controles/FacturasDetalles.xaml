@@ -187,7 +187,6 @@
                             FontSize="12"
                             VerticalAlignment="Center"
                             Width="90"
-                            Style="{StaticResource MaterialDesignOutlinedButton}"
                             ToolTip="Ver">
                             Ver
                         </Button>
@@ -243,6 +242,7 @@
                     
                    
                     <TextBox
+                        PreviewTextInput="TxtCantidad_PreviewTextInput"
                         TabIndex="5"
                         IsEnabled="False"
                         Name="txtCantidad"
@@ -265,6 +265,7 @@
                     </TextBox>                    
 
                     <TextBox
+                        PreviewTextInput="TxtDel_PreviewTextInput"
                         TabIndex="6"
                         IsEnabled="False"
                         Name="txtDel"
@@ -287,6 +288,7 @@
                     </TextBox>
 
                     <TextBox
+                        PreviewTextInput="TxtAl_PreviewTextInput"
                         TabIndex="7"
                         IsEnabled="False"
                         Name="txtAl"
@@ -331,6 +333,7 @@
                     </TextBox>
 
                     <DatePicker
+                        PreviewTextInput="TxtVigencia_PreviewTextInput"
                         TabIndex="9"
                         Margin="10 0 0 0"
                         IsEnabled="False"
@@ -342,6 +345,7 @@
                         FontSize="14"/>
 
                     <DatePicker
+                        PreviewTextInput="TxtCreacion_PreviewTextInput"
                         TabIndex="10"
                         IsEnabled="False"
                         Name="txtCreacion"
@@ -354,6 +358,7 @@
 
 
                     <TextBox
+                        PreviewTextInput="TxtImprenta_PreviewTextInput"
                         TabIndex="11"
                         IsEnabled="False"
                         Name="txtImprenta"
@@ -394,7 +399,7 @@
 
             <Grid Grid.Row="1">
                 <StackPanel Margin="50 20 0 0" Width="1040" HorizontalAlignment="Left">
-                    <DataGrid Name="VistaData" IsReadOnly="True" AutoGenerateColumns="False" Background="#f2f2f2" Width="1040" HorizontalAlignment="Left">
+                    <DataGrid Height="285" Name="VistaData" IsReadOnly="True" AutoGenerateColumns="False" Background="#f2f2f2" Width="1040" HorizontalAlignment="Left">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=tipo_doc}" Header="Tipo Documento" Width="140"/>
                             <DataGridTextColumn Binding="{Binding Path=serie}" Header="Serie" Width="100"/>

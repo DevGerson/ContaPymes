@@ -23,13 +23,15 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class Facturas : UserControl
     {
-        ClassFacturas classFacturas = new ClassFacturas();
         bool ModoBusqueda;
+        ClassMensajes classMensajes = new ClassMensajes();
+        ClassFacturas classFacturas = new ClassFacturas();
 
-        public Facturas(int nitContribuyente)
+        public Facturas(string nitContribuyente)
         {
             InitializeComponent();
             txtNit.Text = nitContribuyente.ToString();
+            Vista();
         }
 
         public void LimpiarTxt()
@@ -73,11 +75,97 @@ namespace ContabilidadPymes.Controles
             txtTipo.IsEnabled = Estado;
         }
 
+        public void ValidacionIngresar()
+        {
+            if (txtCreacion.Text!=""||txtSerie.Text!=""||txtTipo.Text!="")
+            {
+                Ingresar();
+                LimpiarTxt();
+                Vista();
+                classMensajes.MensajesCortos("Exito","Se registraron los datos.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionIngresarBusqueda()
+        {
+            if (txtCreacion.Text != "" || txtSerie.Text != "" || txtTipo.Text != "")
+            {
+                Ingresar();
+                LimpiarTxt();                
+                BloqueoTxt(false);
+                BloqueoTxtBusqueda(true);
+                BloqueoBtnGuardar(false);
+                ModoBusqueda = true;                
+                txtSerie.Focus();
+                classMensajes.MensajesCortos("Exito", "Se registraron los datos.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionModificar()
+        {
+            if (txtSerie.Text!=""||txtTipo.Text!="")
+            {
+                Modificar();
+                ModoBusqueda = false;
+                BloqueoBtnBusqueda(false);
+                BloqueoBtnGuardar(true);
+                LimpiarTxt();
+                Vista();
+                classMensajes.MensajesCortos("Exito","Se modifico el registro.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionEliminar()
+        {
+            if (txtSerie.Text!=""||txtTipo.Text!="")
+            {
+                Eliminar();
+                ModoBusqueda = false;
+                BloqueoBtnBusqueda(false);
+                BloqueoBtnGuardar(true);
+                LimpiarTxt();
+                Vista();
+                classMensajes.MensajesCortos("Exito","Se elimino el registro.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionBusqueda()
+        {
+            if (txtSerie.Text != "" || txtTipo.Text != "")
+            {
+                Buscar();
+                ModoBusqueda = false;                
+                BloqueoTxt(true);
+                BloqueoBtnGuardar(false);
+                BloqueoBtnBusqueda(true);
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
         public void Ingresar()
         {
             DateTime fecha = DateTime.Parse(txtCreacion.Text);
             DateTime fecha2 = DateTime.Parse(fecha.ToString("yyyy/MM/dd"));
-            classFacturas.Parametros(int.Parse(txtNit.Text.Trim()),txtTipo.Text.Trim(),txtSerie.Text.Trim(),fecha2);
+            classFacturas.Parametros(txtNit.Text.Trim(),txtTipo.Text.Trim(),txtSerie.Text.Trim(),fecha2);
             classFacturas.Ingresar();
         }
 
@@ -85,19 +173,19 @@ namespace ContabilidadPymes.Controles
         {
             DateTime fecha = DateTime.Parse(txtCreacion.Text);
             DateTime fecha2 = DateTime.Parse(fecha.ToString("yyyy/MM/dd"));
-            classFacturas.Parametros(int.Parse(txtNit.Text.Trim()), txtTipo.Text.Trim(), txtSerie.Text.Trim(), fecha2);
+            classFacturas.Parametros(txtNit.Text.Trim(), txtTipo.Text.Trim(), txtSerie.Text.Trim(), fecha2);
             classFacturas.Modificar();
         }
 
         public void Eliminar()
         {
-            classFacturas.ParametrosBusqueda(int.Parse(txtNit.Text.Trim()),txtSerie.Text.Trim(), txtTipo.Text.Trim());
+            classFacturas.ParametrosBusqueda(txtNit.Text.Trim(),txtSerie.Text.Trim(), txtTipo.Text.Trim());
             classFacturas.Eliminar();
         }
 
         public void Buscar()
         {
-            classFacturas.ParametrosBusqueda(int.Parse(txtNit.Text.Trim()), txtSerie.Text.Trim(),txtTipo.Text.Trim());
+            classFacturas.ParametrosBusqueda(txtNit.Text.Trim(), txtSerie.Text.Trim(),txtTipo.Text.Trim());
             classFacturas.Buscar();
             txtTipo.Text = classFacturas.tipo;
             txtSerie.Text = classFacturas.serie;
@@ -106,15 +194,13 @@ namespace ContabilidadPymes.Controles
 
         public void Vista()
         {
-            classFacturas.ParametrosVista(int.Parse(txtNit.Text.Trim()));
+            classFacturas.ParametrosVista(txtNit.Text.Trim());
             VistaLibrosData.ItemsSource = classFacturas.Vista().Tables[0].DefaultView;
         }
 
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
-            Vista();
+            ValidacionIngresar();
         }
 
         private void BtnBuscar_Click(object sender, RoutedEventArgs e)
@@ -133,26 +219,15 @@ namespace ContabilidadPymes.Controles
                         //Bloquea los textbox para resaltar los campos a ingresar
                         BloqueoTxt(false);
                         BloqueoTxtBusqueda(true);
-                        LimpiarTxt();
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
+                        BloqueoBtnBusqueda(false);
                         BloqueoBtnGuardar(false);
                         ModoBusqueda = true;
-                        //Focus en Fecha
+                        LimpiarTxt();                        
                         txtSerie.Focus();
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        //Ingresa los datos
-                        Ingresar();
-                        LimpiarTxt();
-                        //Bloquea los textbox para resaltar los campos a ingresar
-                        BloqueoTxt(false);
-                        BloqueoTxtBusqueda(true);
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
-                        BloqueoBtnGuardar(false);
-                        ModoBusqueda = true;
-                        //Focus en fecha
-                        txtSerie.Focus();
+                        ValidacionIngresarBusqueda();
                     }
                 }
                 else
@@ -175,35 +250,20 @@ namespace ContabilidadPymes.Controles
                 }
                 else
                 {
-                    ModoBusqueda = false;
-                    Buscar();
-                    BloqueoTxt(true);
-                    BloqueoBtnGuardar(false);
-                    BloqueoBtnBusqueda(true);
+                    ValidacionBusqueda();
                 }
-
             }
         }
 
         private void BtnEditar_Click(object sender, RoutedEventArgs e)
         {
-            Modificar();
-            ModoBusqueda = false;
-            BloqueoBtnBusqueda(false);
-            BloqueoBtnGuardar(true);
-            LimpiarTxt();
-            Vista();
+            ValidacionModificar();
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
-            Eliminar();
-            ModoBusqueda = false;
-            BloqueoBtnBusqueda(false);
-            BloqueoBtnGuardar(true);
-            LimpiarTxt();
-            Vista();
-        }
+            ValidacionEliminar();
+        }   
 
         private void BtnNuevo_Click(object sender, RoutedEventArgs e)
         {

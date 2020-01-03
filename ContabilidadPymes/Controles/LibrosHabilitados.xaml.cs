@@ -86,9 +86,10 @@ namespace ContabilidadPymes.Controles
                     {
                         BloqueoTxt(false);
                         BloqueoBusquedaTxt(true);
-                        LimpiarTxt();
+                        BloqueoBusquedaBtn(false);                        
                         BloqueoBtnGuardar(false);
                         ModoBusqueda = true;
+                        LimpiarTxt();
                         txt_resolucion.Focus();
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
@@ -113,6 +114,7 @@ namespace ContabilidadPymes.Controles
                 {
                     ModoBusqueda = false;
                     BloqueoTxt(true);
+                    BloqueoBtnGuardar(true);
                 }
                 else
                 {
@@ -164,7 +166,7 @@ namespace ContabilidadPymes.Controles
 
         private void Txt_resolucion_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            validaciones.ValidacionNumeroDeFacturas(e);
+            //validaciones.ValidacionNumeroDeFacturas(e);
         }
 
         #endregion
@@ -180,7 +182,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassLibros cLibros = new ClassLibros();
-                cLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                cLibros.BuscarLibro(combo_nit.SelectedValue.ToString().Trim(), txt_resolucion.Text.Trim());
                 if (cLibros.ValidacionDuplicadosLibros() == false)
                 {
                     Ingresar();
@@ -206,7 +208,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassLibros cLibros = new ClassLibros();
-                cLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                cLibros.BuscarLibro(combo_nit.SelectedValue.ToString().Trim(), txt_resolucion.Text.Trim());
                 if (cLibros.ValidacionDuplicadosLibros() == false)
                 {
                     //Proceso de Ingresar
@@ -273,7 +275,7 @@ namespace ContabilidadPymes.Controles
             }
             else
             {
-                classLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_resolucion.Text.Trim());
+                classLibros.BuscarLibro(combo_nit.SelectedValue.ToString().Trim(), txt_resolucion.Text.Trim());
                 if (classLibros.FacturaEncontrada() == true)
                 {
                     Busqueda();
@@ -296,7 +298,7 @@ namespace ContabilidadPymes.Controles
         {
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-            classLibros.NuevoLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()),fecha2,Convert.ToInt32(txt_hojas.Text.Trim()),txt_tipo.Text.Trim(),txt_resolucion.Text.Trim());
+            classLibros.NuevoLibro(combo_nit.SelectedValue.ToString(),fecha2,Convert.ToInt32(txt_hojas.Text.Trim()),txt_tipo.Text.Trim(),txt_resolucion.Text.Trim());
             classLibros.Ingresar();
         }
 
@@ -304,19 +306,19 @@ namespace ContabilidadPymes.Controles
         {
             fecha = Convert.ToDateTime(txt_fecha.Text);
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
-            classLibros.NuevoLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()), fecha2, Convert.ToInt32(txt_hojas.Text.Trim()), txt_tipo.Text.Trim(), txt_resolucion.Text.Trim());
+            classLibros.NuevoLibro(combo_nit.SelectedValue.ToString(), fecha2, Convert.ToInt32(txt_hojas.Text.Trim()), txt_tipo.Text.Trim(), txt_resolucion.Text.Trim());
             classLibros.Modificar();
         }
 
         public void Eliminar()
         {
-            classLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_resolucion.Text.Trim());
+            classLibros.BuscarLibro(combo_nit.SelectedValue.ToString(), txt_resolucion.Text.Trim());
             classLibros.Eliminar();
         }
 
         public void Busqueda()
         {
-            classLibros.BuscarLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_resolucion.Text.Trim());
+            classLibros.BuscarLibro(combo_nit.SelectedValue.ToString(), txt_resolucion.Text.Trim());
             classLibros.Buscar();
             txt_fecha.Text = classLibros.fecha.ToString("dd/MM/yyyy");
             txt_hojas.Text = classLibros.hojas.ToString();
@@ -326,7 +328,7 @@ namespace ContabilidadPymes.Controles
 
         public void VistaLibros()
         {
-            classLibros.ParametrosVistaLibro(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
+            classLibros.ParametrosVistaLibro(combo_nit.SelectedValue.ToString());
             VistaLibrosData.ItemsSource = null;
             VistaLibrosData.ItemsSource = classLibros.Vista().Tables[0].DefaultView;
         }

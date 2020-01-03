@@ -103,5 +103,19 @@ namespace ContabilidadPymes
             contenedor.Children.Add(new Controles.Usuario());
             btn_cerrar_menu.Command.Execute(null);
         }
+
+        private void BtnProveedor_Click(object sender, RoutedEventArgs e)
+        {
+            contenedor.Children.Clear();
+            contenedor.Children.Add(new Controles.Proveedores());
+            btn_cerrar_menu.Command.Execute(null);
+        }
+
+        private void BtnClientes_Click(object sender, RoutedEventArgs e)
+        {
+            contenedor.Children.Clear();
+            contenedor.Children.Add(new Controles.Clientes());
+            btn_cerrar_menu.Command.Execute(null);
+        }
     }
 }

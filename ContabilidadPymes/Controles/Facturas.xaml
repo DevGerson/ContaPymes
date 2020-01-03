@@ -180,11 +180,11 @@
 
             <Grid Grid.Row="1">
                 <StackPanel Margin="50 20 0 0" Width="560" HorizontalAlignment="Left">
-                    <DataGrid IsReadOnly="True"  Width="560" MaxHeight="390" Height="390" AutoGenerateColumns="False" Name="VistaLibrosData" Background="#f2f2f2">
+                    <DataGrid CanUserResizeColumns="False" SelectionUnit="Cell" IsReadOnly="True" Width="560" MaxHeight="340" Height="340" AutoGenerateColumns="False" Name="VistaLibrosData" Background="#f2f2f2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Path=creacion,StringFormat=dd/MM/yyyy}" Header="Creación" Width="120"/>
-                            <DataGridTextColumn Binding="{Binding Path=serie}" Header="Serie" Width="180"/>
-                            <DataGridTextColumn Binding="{Binding Path=tipo_doc}" Header="Tipos de Documento" Width="250"/>
+                            <DataGridTextColumn Binding="{Binding Path=serie}" Header="Serie" Width="150"/>
+                            <DataGridTextColumn Binding="{Binding Path=tipo_doc}" Header="Tipos de Documento" Width="230"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

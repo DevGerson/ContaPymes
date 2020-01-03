@@ -11,7 +11,7 @@ namespace ContabilidadPymes.Clases
     class ClassFacturas
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private string Tipo { get; set; }
         private string Serie { get; set; }
         private DateTime Creacion { get; set; }
@@ -21,7 +21,7 @@ namespace ContabilidadPymes.Clases
 
         }
 
-        public void Parametros(int nit, string tipo, string serie, DateTime creacion)
+        public void Parametros(string nit, string tipo, string serie, DateTime creacion)
         {
             Nit = nit;
             Tipo = tipo;
@@ -29,26 +29,26 @@ namespace ContabilidadPymes.Clases
             Creacion = creacion;
         }
 
-        public void ParametrosBusqueda(int nit,string serie,string tipo)
+        public void ParametrosBusqueda(string nit,string serie,string tipo)
         {
             Nit = nit;
             Serie = serie;
             Tipo = tipo;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
 
-        public void ParametrosListSeries(int nit,string tipo)
+        public void ParametrosListSeries(string nit,string tipo)
         {
             Nit = nit;
             Tipo = tipo;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public string tipo { get { return Tipo; } set { Tipo = value; } }
         public string serie { get { return Serie; } set { Serie = value; } }
         public DateTime creacion { get { return Creacion; } set { Creacion = value; } }
@@ -59,7 +59,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarFacturas", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@creacion", SqlDbType.Date).Value = creacion;
@@ -73,7 +73,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarFacturas", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@creacion", SqlDbType.Date).Value = creacion;
@@ -87,7 +87,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarFacturas", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             cmd.ExecuteNonQuery();
@@ -100,7 +100,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarFacturas", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             adp.SelectCommand.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             adp.SelectCommand.ExecuteNonQuery();
@@ -117,7 +117,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaFacturas", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -131,7 +131,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ListFacturas", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -145,7 +145,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ListSeries", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();

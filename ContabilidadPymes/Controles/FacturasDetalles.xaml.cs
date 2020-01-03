@@ -23,10 +23,18 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class FacturasDetalles : UserControl
     {
-        ClassFacturasDetalles classFacturasDetalles = new ClassFacturasDetalles();
+        #region Variables
+
+        bool ModoBusqueda;
+        Validaciones validaciones = new Validaciones();
+        ClassMensajes classMensajes = new ClassMensajes();
         ClassFacturas classFacturas = new ClassFacturas();
         ClassContribuyente classContribuyente = new ClassContribuyente();
-        bool ModoBusqueda;
+        ClassFacturasDetalles classFacturasDetalles = new ClassFacturasDetalles();
+
+        #endregion
+
+        #region Constructor
 
         public FacturasDetalles()
         {
@@ -34,10 +42,14 @@ namespace ContabilidadPymes.Controles
             CargarComboContribuyente();
         }
 
+        #endregion
+
         #region Controles
+
         private void Btn_contribuyentes_Click(object sender, RoutedEventArgs e)
         {
-
+            string d = combo_nit.SelectedValue.ToString();
+            classMensajes.MensajesCortos("NIT",d);
         }
 
         private void Combo_nit_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -74,6 +86,7 @@ namespace ContabilidadPymes.Controles
         {
             ModoBusqueda = false;
             LimpiarTxt();
+            BloqueoTxt(true);
             BloqueoBtnBusqueda(false);
             BloqueoBtnGuardar(true);
         }
@@ -85,36 +98,22 @@ namespace ContabilidadPymes.Controles
 
         private void Btn2_guardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
-            Vista();            
+            ValidacionIngresar();       
         }
 
         private void Btn_guardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
-            Vista();
+            ValidacionIngresar();
         }
 
         private void Btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
-            Eliminar();
-            LimpiarTxt();
-            Vista();
-
-            BloqueoBtnGuardar(true);
-            BloqueoBtnBusqueda(false);
+            ValidacionEliminar();
         }
 
         private void Btn_editar_Click(object sender, RoutedEventArgs e)
         {
-            Modificar();
-            LimpiarTxt();
-            Vista();
-
-            BloqueoBtnGuardar(true);
-            BloqueoBtnBusqueda(false);
+            ValidacionModificar();
         }
 
         private void Btn_buscar_Click(object sender, RoutedEventArgs e)
@@ -130,29 +129,17 @@ namespace ContabilidadPymes.Controles
                     MessageBoxResult messageBoxResult = MessageBox.Show("Se perderan los datos si no ha guardado. ¿Desea Guardar los datos?", "Buscar", boxButton);
                     if (messageBoxResult == MessageBoxResult.No)
                     {
-                        //Bloquea los textbox para resaltar los campos a ingresar
                         BloqueoTxt(false);
                         BloqueoTxtBusqueda(true);
-                        LimpiarTxt();
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
                         BloqueoBtnGuardar(false);
+                        LimpiarTxt();
                         ModoBusqueda = true;
-                        //Focus en Fecha
+                        BloqueoBtnBusqueda(false);
                         txtResolucion.Focus();
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        //Ingresa los datos
-                        Ingresar();
-                        LimpiarTxt();
-                        //Bloquea los textbox para resaltar los campos a ingresar
-                        BloqueoTxt(false);
-                        BloqueoTxtBusqueda(true);
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
-                        BloqueoBtnGuardar(false);
-                        ModoBusqueda = true;
-                        //Focus en fecha
-                        txtResolucion.Focus();
+                        ValidacionIngresarBusqueda();
                     }
                 }
                 else
@@ -172,14 +159,11 @@ namespace ContabilidadPymes.Controles
                 {
                     ModoBusqueda = false;
                     BloqueoTxt(true);
+                    BloqueoBtnGuardar(true);
                 }
                 else
                 {
-                    ModoBusqueda = false;
-                    Buscar();
-                    BloqueoTxt(true);
-                    BloqueoBtnGuardar(false);
-                    BloqueoBtnBusqueda(true);
+                    ValidacionBusqueda();
                 }
 
             }
@@ -192,9 +176,45 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_seriesRegistradas_Click(object sender, RoutedEventArgs e)
         {
-            FacturaSeries facturaSeries = new FacturaSeries(int.Parse(combo_nit.SelectedValue.ToString()));
+            FacturaSeries facturaSeries = new FacturaSeries(combo_nit.SelectedValue.ToString());
             facturaSeries.ShowDialog();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ListSeries();
+        }
+
+        private void TxtCantidad_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void TxtDel_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void TxtAl_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void TxtVigencia_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionFechas(e);
+        }
+
+        private void TxtCreacion_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionFechas(e);
+        }
+
+        private void TxtImprenta_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
         #endregion
 
         #region Funciones
@@ -263,6 +283,123 @@ namespace ContabilidadPymes.Controles
             btn_guardar.IsEnabled = Estado;
         }
 
+        public void ValidacionIngresarBusqueda()
+        {
+            if (txtTipo.Text!=""||txtSerie.Text!=""||txtCantidad.Text!=""||txtDel.Text!=""||txtAl.Text!=""||txtResolucion.Text!=""||txtVigencia.Text!=""||txtCreacion.Text!=""||txtImprenta.Text!="")
+            {
+                classFacturasDetalles.ParametrosBusqueda(combo_nit.SelectedValue.ToString(),txtResolucion.Text.Trim());
+                if (classFacturasDetalles.ValidacionDuplicadosFacturasDetalles()==false)
+                {
+                    //Ingresa los datos
+                    Ingresar();
+                    //Se limpia los Textbox
+                    LimpiarTxt();
+                    //Se Bloquea los Textbox
+                    BloqueoTxt(false);
+                    //Se Desbloqueo los Textbox para su busqueda
+                    BloqueoTxtBusqueda(true);
+                    //Se bloquea los Buttons de guardar
+                    BloqueoBtnGuardar(false);
+                    //Se pone en modo busqueda falso                    
+                    ModoBusqueda = true;
+                    //Focus en Textbox Resolucion
+                    txtResolucion.Focus();
+                    //Mensaje de alerta
+                    classMensajes.MensajesCortos("Exito", "Se regitro correctamente.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro Duplicado. Verifique la información");
+                }
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Exito", "Se regitro correctamente.");
+            }
+        }
+
+        public void ValidacionIngresar()
+        {
+            if (txtTipo.Text != "" || txtSerie.Text != "" || txtCantidad.Text != "" || txtDel.Text != "" || txtAl.Text != "" || txtResolucion.Text != "" || txtVigencia.Text != "" || txtCreacion.Text != "" || txtImprenta.Text != "")
+            {
+                classFacturasDetalles.ParametrosBusqueda(combo_nit.SelectedValue.ToString(), txtResolucion.Text.Trim());
+                if (classFacturasDetalles.ValidacionDuplicadosFacturasDetalles() == false)
+                {
+                    Ingresar();
+                    LimpiarTxt();
+                    Vista();
+                    classMensajes.MensajesCortos("Exito", "Se regitro correctamente.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro Duplicado. Verifique la información");
+                }
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Exito", "Se regitro correctamente.");
+            }
+        }
+
+        public void ValidacionModificar()
+        {
+            if (txtTipo.Text != "" || txtSerie.Text != "" || txtCantidad.Text != "" || txtDel.Text != "" || txtAl.Text != "" || txtResolucion.Text != "" || txtVigencia.Text != "" || txtCreacion.Text != "" || txtImprenta.Text != "")
+            {
+                Modificar();
+                LimpiarTxt();
+                Vista();
+                BloqueoBtnGuardar(true);
+                BloqueoBtnBusqueda(false);
+
+                classMensajes.MensajesCortos("Exito","Se modifico correctamente.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionEliminar()
+        {
+            if (txtResolucion.Text != "")
+            {
+                Eliminar();
+                LimpiarTxt();
+                Vista();
+                BloqueoBtnGuardar(true);
+                BloqueoBtnBusqueda(false);
+                classMensajes.MensajesCortos("Exito", "Se modifico correctamente.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionBusqueda()
+        {
+            if (txtResolucion.Text!="")
+            {
+                classFacturasDetalles.ParametrosBusqueda(combo_nit.SelectedValue.ToString(),txtResolucion.Text.Trim());
+                if (classFacturasDetalles.FacturaEncontrada()==true)
+                {
+                    Buscar();
+                    ModoBusqueda = false;
+                    BloqueoTxt(true);
+                    BloqueoBtnGuardar(false);
+                    BloqueoBtnBusqueda(true);
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error","No existe este registro");
+                }
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
         public void Ingresar()
         {
             DateTime VigenciaOne, VigenciaTwo;
@@ -272,8 +409,8 @@ namespace ContabilidadPymes.Controles
             CreacionOne = DateTime.Parse(txtCreacion.Text.Trim());
             CreacionTwo = DateTime.Parse(CreacionOne.ToString("yyyy/MM/dd"));
 
-            classFacturasDetalles.ParametrosFacturas(int.Parse(combo_nit.SelectedValue.ToString()), txtTipo.Text.Trim(), int.Parse(txtCantidad.Text.Trim()), txtSerie.Text.Trim(), int.Parse(txtDel.Text.Trim()),
-                int.Parse(txtAl.Text.Trim()), txtResolucion.Text.Trim(), CreacionTwo, VigenciaTwo, int.Parse(txtImprenta.Text.Trim()));
+            classFacturasDetalles.ParametrosFacturas(combo_nit.SelectedValue.ToString(), txtTipo.Text.Trim(), int.Parse(txtCantidad.Text.Trim()), txtSerie.Text.Trim(), int.Parse(txtDel.Text.Trim()),
+                int.Parse(txtAl.Text.Trim()), txtResolucion.Text.Trim(), CreacionTwo, VigenciaTwo, txtImprenta.Text.Trim());
             classFacturasDetalles.Ingresar();
         }
 
@@ -286,20 +423,20 @@ namespace ContabilidadPymes.Controles
             CreacionOne = DateTime.Parse(txtCreacion.Text.Trim());
             CreacionTwo = DateTime.Parse(CreacionOne.ToString("yyyy/MM/dd"));
 
-            classFacturasDetalles.ParametrosFacturas(int.Parse(combo_nit.SelectedValue.ToString()), txtTipo.Text.Trim(), int.Parse(txtCantidad.Text.Trim()), txtSerie.Text.Trim(), int.Parse(txtDel.Text.Trim()),
-                int.Parse(txtAl.Text.Trim()), txtResolucion.Text.Trim(), CreacionTwo, VigenciaTwo, int.Parse(txtImprenta.Text.Trim()));
+            classFacturasDetalles.ParametrosFacturas(combo_nit.SelectedValue.ToString(), txtTipo.Text.Trim(), int.Parse(txtCantidad.Text.Trim()), txtSerie.Text.Trim(), int.Parse(txtDel.Text.Trim()),
+                int.Parse(txtAl.Text.Trim()), txtResolucion.Text.Trim(), CreacionTwo, VigenciaTwo, txtImprenta.Text.Trim());
             classFacturasDetalles.Modificar();
         }
 
         public void Eliminar()
         {
-            classFacturasDetalles.ParametrosBusqueda(int.Parse(combo_nit.SelectedValue.ToString()), txtResolucion.Text.Trim());
+            classFacturasDetalles.ParametrosBusqueda(combo_nit.SelectedValue.ToString(), txtResolucion.Text.Trim());
             classFacturasDetalles.Eliminar();
         }
 
         public void Buscar()
         {
-            classFacturasDetalles.ParametrosBusqueda(int.Parse(combo_nit.SelectedValue.ToString()), txtResolucion.Text.Trim());
+            classFacturasDetalles.ParametrosBusqueda(combo_nit.SelectedValue.ToString(), txtResolucion.Text.Trim());
             classFacturasDetalles.Buscar();
             txtTipo.Text = classFacturasDetalles.tipo;
             ListSeries();
@@ -315,7 +452,7 @@ namespace ContabilidadPymes.Controles
 
         public void ListTipos()
         {
-            classFacturas.ParametrosVista(int.Parse(combo_nit.SelectedValue.ToString()));
+            classFacturas.ParametrosVista(combo_nit.SelectedValue.ToString());
             txtTipo.ItemsSource = classFacturas.ListTipos().Tables[0].DefaultView;
             txtTipo.DisplayMemberPath = "tipo_doc";
             txtTipo.SelectedValuePath = "tipo_doc";
@@ -323,14 +460,14 @@ namespace ContabilidadPymes.Controles
 
         public void ListSeries()
         {
-            classFacturas.ParametrosListSeries(int.Parse(combo_nit.SelectedValue.ToString()), txtTipo.Text);
+            classFacturas.ParametrosListSeries(combo_nit.SelectedValue.ToString(), txtTipo.Text);
             txtSerie.ItemsSource = classFacturas.ListSeries().Tables[0].DefaultView;
             txtSerie.DisplayMemberPath = "serie";
         }
 
         public void Vista()
         {
-            classFacturasDetalles.ParametrosVista(int.Parse(combo_nit.SelectedValue.ToString()));
+            classFacturasDetalles.ParametrosVista(combo_nit.SelectedValue.ToString());
             VistaData.ItemsSource = null;
             VistaData.ItemsSource = classFacturasDetalles.Vista().Tables[0].DefaultView;
         }
@@ -340,10 +477,5 @@ namespace ContabilidadPymes.Controles
 
 
         #endregion
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ListSeries();
-        }
     }
 }

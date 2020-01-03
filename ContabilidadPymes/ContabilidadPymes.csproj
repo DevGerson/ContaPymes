@@ -35,6 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -47,11 +49,18 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="sapbusinessobjects.wpf.viewer, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="SAPBusinessObjects.WPF.ViewerShared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -75,11 +84,17 @@
     <Compile Include="Clases\ClassMensajes.cs" />
     <Compile Include="Clases\ClassProveedor.cs" />
     <Compile Include="Clases\Validaciones.cs" />
+    <Compile Include="Controles\Clientes.xaml.cs">
+      <DependentUpon>Clientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controles\Facturas.xaml.cs">
       <DependentUpon>Facturas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controles\FacturasDetalles.xaml.cs">
       <DependentUpon>FacturasDetalles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Proveedores.xaml.cs">
+      <DependentUpon>Proveedores.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controles\ReportContribuyente.xaml.cs">
       <DependentUpon>ReportContribuyente.xaml</DependentUpon>
@@ -96,6 +111,10 @@
     <Compile Include="Ventanas\vtnMensajes.xaml.cs">
       <DependentUpon>vtnMensajes.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controles\Clientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controles\Compras.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controles\Pagos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\Proveedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

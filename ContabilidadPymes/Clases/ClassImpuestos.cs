@@ -12,7 +12,7 @@ namespace ContabilidadPymes.Clases
     class ClassImpuestos
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private decimal Ventas { get; set; }
         private decimal Impuesto { get; set; }
         private decimal Multas { get; set; }
@@ -25,7 +25,7 @@ namespace ContabilidadPymes.Clases
         }
 
 
-        public void ParametrosImpuestos(int nit, decimal ventas, decimal impuestos, decimal multas, string formulario, string acceso)
+        public void ParametrosImpuestos(string nit, decimal ventas, decimal impuestos, decimal multas, string formulario, string acceso)
         {
             Nit = nit;
             Ventas = ventas;
@@ -35,18 +35,18 @@ namespace ContabilidadPymes.Clases
             Acceso = acceso;
         }
 
-        public void ParametrosBusqueda(int nit, string formulario)
+        public void ParametrosBusqueda(string nit, string formulario)
         {
             Nit = nit;
             Formulario = formulario;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public decimal ventas { get { return Ventas; } set { Ventas = value; } }
         public decimal impuesto { get { return Impuesto; } set { Impuesto = value; } }
         public decimal multas { get { return Multas; } set { Multas = value; } }
@@ -59,7 +59,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarImpuestos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@ventas", SqlDbType.Decimal).Value = ventas;
             cmd.Parameters.Add("@impuesto", SqlDbType.Decimal).Value = impuesto;
             cmd.Parameters.Add("@multa", SqlDbType.Decimal).Value = multas;
@@ -75,7 +75,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarImpuestos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@ventas", SqlDbType.Decimal).Value = ventas;
             cmd.Parameters.Add("@impuesto", SqlDbType.Decimal).Value = impuesto;
             cmd.Parameters.Add("@multa", SqlDbType.Decimal).Value = multas;
@@ -91,7 +91,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarImpuestos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -103,7 +103,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarImpuestos", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -123,7 +123,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarImpuestos", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -147,7 +147,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosImpuesto", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@formulario", SqlDbType.BigInt).Value = formulario;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -170,7 +170,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaImpuestos", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);

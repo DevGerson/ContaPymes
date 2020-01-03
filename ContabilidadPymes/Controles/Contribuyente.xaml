@@ -70,13 +70,7 @@
                         <materialDesign:PackIcon
                             Kind="Search" />
                     </Button>
-                    <Separator/>
-                    <Button
-                        IsEnabled="False"
-                        ToolTip="Nomenclatura Cuentas">
-                        <materialDesign:PackIcon
-                            Kind="FormatListBulleted" />
-                    </Button>
+                    <Separator/>                   
                     <Button
                         Click="Reporte_contribuyente_Click"
                         Name="reporte_contribuyente"
@@ -84,6 +78,12 @@
                         ToolTip="Reporte Contribuyente">
                         <materialDesign:PackIcon
                             Kind="ViewList" />
+                    </Button>
+                    <Button
+                        IsEnabled="False"
+                        ToolTip="Nomenclatura Cuentas">
+                        <materialDesign:PackIcon
+                            Kind="InfoVariant" />
                     </Button>
                     <Separator/>
                     <Button
@@ -130,6 +130,7 @@
                     
                     <!--Textbox-->
                     <TextBox
+                        PreviewTextInput="Txt_nit_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_nit"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -170,6 +171,7 @@
 
                     <!--Textbox-->
                     <TextBox
+                        PreviewTextInput="Txt_cui_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_cui"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -210,6 +212,7 @@
 
                     <!--Textbox-->
                     <TextBox
+                        PreviewTextInput="Txt_telefono_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_telefono"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -322,6 +325,7 @@
 
                     <!--Textbox-->
                     <TextBox
+                        PreviewTextInput="Txt_usuario_PreviewTextInput"
                         IsEnabled="False"
                         Name="txt_usuario"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"

@@ -79,7 +79,7 @@ namespace ContabilidadPymes.Controles
 
         public void VistaCompras()
         {
-            classCompras.ParametrosVista(int.Parse(combo_razon.SelectedValue.ToString()));
+            classCompras.ParametrosVista(combo_razon.SelectedValue.ToString());
             ViewData.ItemsSource = null;
             ViewData.ItemsSource = classCompras.VistaCompras().Tables[0].DefaultView;
         }
@@ -133,12 +133,12 @@ namespace ContabilidadPymes.Controles
             if (combo_razon.SelectedValue.ToString() == "" || txt_fecha.Text == "" || txt_tipo_doc.Text == "" || txt_serie.Text == "" || txt_factura.Text == "" || combo_cliente.Text == ""
                 || txt_monto.Text == "")
             {
-                classMensajes.MensajesCortos("Error", "Campos Vasillos");
+                classMensajes.MensajesCortos("Error", "Campos Vacios");
             }
             else
             {
                 ClassCompras cCompras = new ClassCompras();                
-                cCompras.ParametrosDuplicados(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()), txt_tipo_doc.Text.Trim());
+                cCompras.ParametrosDuplicados(combo_razon.SelectedValue.ToString().Trim(), combo_cliente.SelectedValue.ToString().Trim(), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()), txt_tipo_doc.Text.Trim());
                 //Verifica que no halla deuplicados
                 if (cCompras.ValidacionDuplicadosCompras() == false)
                 {
@@ -179,7 +179,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassCompras cCompras = new ClassCompras();
-                cCompras.ParametrosDuplicados(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()), txt_tipo_doc.Text.Trim());
+                cCompras.ParametrosDuplicados(combo_razon.SelectedValue.ToString().Trim(), combo_cliente.SelectedValue.ToString().Trim(), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()), txt_tipo_doc.Text.Trim());
                 if (cCompras.ValidacionDuplicadosCompras() == false)
                 {
                     Ingresar();
@@ -226,7 +226,7 @@ namespace ContabilidadPymes.Controles
             }
             else
             {
-                classCompras.Busqueda(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
+                classCompras.Busqueda(combo_razon.SelectedValue.ToString().Trim(), combo_cliente.SelectedValue.ToString().Trim(), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
                 if (classCompras.FacturaEncontrado()==true)
                 {
                     Busqueda();
@@ -271,12 +271,12 @@ namespace ContabilidadPymes.Controles
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
             iva = Convert.ToDecimal(txt_monto.Text.Trim()) * Convert.ToDecimal(0.05);
             classCompras.NuevaFacturaCompra(
-                Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()),
+                combo_razon.SelectedValue.ToString().Trim(),
                 fecha2,
                 txt_tipo_doc.Text.Trim(),
                 txt_serie.Text.Trim(),
                 Convert.ToInt32(txt_factura.Text.Trim()),
-                Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()),
+                combo_cliente.SelectedValue.ToString().Trim(),
                 Convert.ToDecimal(txt_monto.Text.Trim()),
                 iva);
             classCompras.IngresarFacturaCompras();
@@ -284,7 +284,7 @@ namespace ContabilidadPymes.Controles
 
         public void Busqueda()
         {
-            classCompras.Busqueda(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
+            classCompras.Busqueda(combo_razon.SelectedValue.ToString().Trim(), combo_cliente.SelectedValue.ToString().Trim(), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
             classCompras.BuscarFacturaCompras();
             txt_fecha.Text = classCompras.fecha.ToString();
             txt_tipo_doc.Text = classCompras.tipo_Doc;
@@ -297,7 +297,7 @@ namespace ContabilidadPymes.Controles
 
         public void Eliminar()
         {
-            classCompras.Busqueda(Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()), Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
+            classCompras.Busqueda(combo_razon.SelectedValue.ToString().Trim(), combo_cliente.SelectedValue.ToString().Trim(), txt_serie.Text.Trim(), Convert.ToInt32(txt_factura.Text.Trim()));
             classCompras.EliminarFacturaCompras();
         }
 
@@ -307,12 +307,12 @@ namespace ContabilidadPymes.Controles
             fecha2 = Convert.ToDateTime(fecha.ToString("yyyy/MM/dd"));
             iva = Convert.ToDecimal(txt_monto.Text.Trim()) * Convert.ToDecimal(0.05);
             classCompras.NuevaFacturaCompra(
-                Convert.ToInt32(combo_razon.SelectedValue.ToString().Trim()),
+                combo_razon.SelectedValue.ToString().Trim(),
                 fecha2,
                 txt_tipo_doc.Text.Trim(),
                 txt_serie.Text.Trim(),
                 Convert.ToInt32(txt_factura.Text.Trim()),
-                Convert.ToInt32(combo_cliente.SelectedValue.ToString().Trim()),
+                combo_cliente.SelectedValue.ToString().Trim(),
                 Convert.ToDecimal(txt_monto.Text.Trim()),
                 iva);
             classCompras.ModificarFacturaCompras();

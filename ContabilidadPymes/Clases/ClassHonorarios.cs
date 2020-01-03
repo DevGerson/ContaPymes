@@ -12,7 +12,7 @@ namespace ContabilidadPymes.Clases
     public class ClassHonorarios
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private decimal Honorario { get; set; }
 
 
@@ -21,18 +21,18 @@ namespace ContabilidadPymes.Clases
 
         }
 
-        public void ParametrosHonorarios(int nit, decimal honorario)
+        public void ParametrosHonorarios(string nit, decimal honorario)
         {
             Nit = nit;
             Honorario = honorario;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public decimal honorario { get { return Honorario; } set { Honorario = value; } }
         public string contribuyente { get; set; }
 
@@ -42,7 +42,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarHonorarios", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@honorarioS", SqlDbType.Decimal).Value = honorario;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -54,7 +54,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarHonorarios", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@honorarioS", SqlDbType.Decimal).Value = honorario;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -66,7 +66,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarHonorarios", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.ExecuteNonQuery();
             cnn.Close();
         }
@@ -77,7 +77,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarHonorarios", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -113,7 +113,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarHonorarios", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -136,7 +136,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosHonorarios", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);

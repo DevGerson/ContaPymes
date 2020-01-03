@@ -12,12 +12,12 @@ namespace ContabilidadPymes.Clases
     class ClassCompras
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private DateTime Fecha { get; set; }
         private string Tipo_Doc { get; set; }
         private string Serie { get; set; }
         private int Factura { get; set; }
-        private int Proveedor { get; set; }
+        private string Proveedor { get; set; }
         private decimal Monto { get; set; }
         private decimal Iva { get; set; }
         private string NombreProveedor { get; set; }
@@ -27,7 +27,7 @@ namespace ContabilidadPymes.Clases
             
         }
 
-        public void NuevaFacturaCompra(int nit, DateTime fecha, string tipo_doc, string serie, int factura, int proveedor, decimal monto, decimal iva)
+        public void NuevaFacturaCompra(string nit, DateTime fecha, string tipo_doc, string serie, int factura, string proveedor, decimal monto, decimal iva)
         {
             Nit = nit;
             Fecha = fecha;
@@ -39,7 +39,7 @@ namespace ContabilidadPymes.Clases
             Iva = iva;
         }
 
-        public void Busqueda(int nit, int proveedor, string serie, int factura)
+        public void Busqueda(string nit, string proveedor, string serie, int factura)
         {
             Nit = nit;
             Proveedor = proveedor;
@@ -47,7 +47,7 @@ namespace ContabilidadPymes.Clases
             Factura = factura;
         }
 
-        public void ParametrosDuplicados(int nit, int proveedor, string serie, int factura, string tipo_doc)
+        public void ParametrosDuplicados(string nit, string proveedor, string serie, int factura, string tipo_doc)
         {
             Nit = nit;
             Proveedor = proveedor;
@@ -56,18 +56,18 @@ namespace ContabilidadPymes.Clases
             Tipo_Doc = tipo_doc;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public DateTime fecha { get { return Fecha; } set { Fecha = value; } }
         public string tipo_Doc { get { return Tipo_Doc; } set { Tipo_Doc = value; } }
         public string serie { get { return Serie; } set { Serie = value; } }
         public int factura { get { return Factura; } set { Factura = value; } }
-        public int proveedor { get { return Proveedor; } set { Proveedor = value; } }
+        public string proveedor { get { return Proveedor; } set { Proveedor = value; } }
         public decimal monto { get { return Monto; } set { Monto = value; } }
         public decimal iva { get { return Iva; } set { Iva = value; } }
         public string nombreProveedor { get { return NombreProveedor; } set { NombreProveedor = value; } }
@@ -79,12 +79,12 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresoFacturaCompras", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo_Doc;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
-            cmd.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            cmd.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             cmd.Parameters.Add("@monto", SqlDbType.Decimal).Value = monto;
             cmd.Parameters.Add("@iva", SqlDbType.Decimal).Value = iva;
             cmd.ExecuteNonQuery();
@@ -97,12 +97,12 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarFacturaCompras", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo_Doc;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
-            cmd.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            cmd.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             cmd.Parameters.Add("@monto", SqlDbType.Decimal).Value = monto;
             cmd.Parameters.Add("@iva", SqlDbType.Decimal).Value = iva;
             cmd.ExecuteNonQuery();
@@ -115,8 +115,8 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarFacturaCompras", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
-            cmd.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            cmd.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             cmd.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
             cmd.ExecuteNonQuery();
@@ -129,7 +129,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaFacturaCompras", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -143,8 +143,8 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarCuentasCompras", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit",SqlDbType.Int).Value=nit;
-            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            adp.SelectCommand.Parameters.Add("@nit",SqlDbType.BigInt).Value=nit;
+            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             adp.SelectCommand.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             adp.SelectCommand.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
             adp.SelectCommand.ExecuteNonQuery();
@@ -154,7 +154,7 @@ namespace ContabilidadPymes.Clases
             tipo_Doc = ds.Tables[0].Rows[0][1].ToString();
             serie = ds.Tables[0].Rows[0][2].ToString();
             factura = Convert.ToInt32(ds.Tables[0].Rows[0][3].ToString());
-            proveedor = Convert.ToInt32(ds.Tables[0].Rows[0][4].ToString());
+            proveedor = ds.Tables[0].Rows[0][4].ToString();
             nombreProveedor = ds.Tables[0].Rows[0][5].ToString();
             monto = Convert.ToDecimal(ds.Tables[0].Rows[0][6].ToString());
             iva = Convert.ToDecimal(ds.Tables[0].Rows[0][7].ToString());
@@ -168,8 +168,8 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarCuentasCompras", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
-            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             adp.SelectCommand.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             adp.SelectCommand.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
             adp.SelectCommand.ExecuteNonQuery();
@@ -194,8 +194,8 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosCompras", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
-            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.Int).Value = proveedor;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@proveedor", SqlDbType.BigInt).Value = proveedor;
             adp.SelectCommand.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
             adp.SelectCommand.Parameters.Add("@factura", SqlDbType.Int).Value = factura;
             adp.SelectCommand.Parameters.Add("@tipo", SqlDbType.VarChar).Value = tipo_Doc;

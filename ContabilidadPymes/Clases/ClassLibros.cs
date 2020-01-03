@@ -12,7 +12,7 @@ namespace ContabilidadPymes.Clases
     class ClassLibros
     {
         DataSet ds;
-        public int Nit { get; set; }
+        public string Nit { get; set; }
         public DateTime Fecha { get; set; }
         public int Hojas { get; set; }
         public string TipoDoc { get; set; }
@@ -23,7 +23,7 @@ namespace ContabilidadPymes.Clases
 
         }
 
-        public void NuevoLibro(int nit, DateTime fecha, int hojas, string tipoDoc, string resolucion)
+        public void NuevoLibro(string nit, DateTime fecha, int hojas, string tipoDoc, string resolucion)
         {
             Nit = nit;
             Fecha = fecha;
@@ -32,18 +32,18 @@ namespace ContabilidadPymes.Clases
             Resolucion = resolucion;
         }
 
-        public void BuscarLibro(int nit, string resolucion)
+        public void BuscarLibro(string nit, string resolucion)
         {
             Nit = nit;
             Resolucion = resolucion;
         }
 
-        public void ParametrosVistaLibro(int nit)
+        public void ParametrosVistaLibro(string nit)
         {
             Nit = nit;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public DateTime fecha { get { return Fecha; } set { Fecha = value; } }
         public int hojas { get { return Hojas; } set { Hojas = value; } }
         public string tipoDoc { get { return TipoDoc; } set { TipoDoc = value; } }
@@ -55,7 +55,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarLibros", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
             cmd.Parameters.Add("@hojas", SqlDbType.VarChar).Value = hojas;
             cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = tipoDoc;
@@ -70,7 +70,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarLibros", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@fecha", SqlDbType.Date).Value = fecha;
             cmd.Parameters.Add("@hojas", SqlDbType.VarChar).Value = hojas;
             cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = tipoDoc;
@@ -85,7 +85,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarLibros", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -97,12 +97,12 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarLibros", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
-            nit = Convert.ToInt32(ds.Tables[0].Rows[0][0].ToString());
+            nit = ds.Tables[0].Rows[0][0].ToString();
             fecha = Convert.ToDateTime(ds.Tables[0].Rows[0][1].ToString());
             hojas = Convert.ToInt32(ds.Tables[0].Rows[0][2].ToString());
             tipoDoc = ds.Tables[0].Rows[0][3].ToString();
@@ -117,7 +117,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarLibros", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -141,7 +141,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosLibros", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -164,7 +164,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaLibros", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);

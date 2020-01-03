@@ -21,13 +21,13 @@ namespace ContabilidadPymes.Ventanas
     {
         public int nit { get; set; }
 
-        public FacturaSeries(int nitC_)
+        public FacturaSeries(string nitC_)
         {
             InitializeComponent();
             Abrir(nitC_);
         }
 
-        public void Abrir(int nitC)
+        public void Abrir(string nitC)
         {
             _datagrid.Children.Clear();
             _datagrid.Children.Add(new Controles.Facturas(nitC));

@@ -12,7 +12,7 @@ namespace ContabilidadPymes.Clases
     public class ClassPagos
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private int Año { get; set; }
         private string Mes { get; set; }
         private decimal Ventas { get; set; }
@@ -29,7 +29,7 @@ namespace ContabilidadPymes.Clases
 
         }
 
-        public void ParametrosPagos(int nit, int año, string mes, decimal ventas, decimal impuesto, decimal multa, decimal honorarios, decimal total, string recibo, DateTime fecha)
+        public void ParametrosPagos(string nit, int año, string mes, decimal ventas, decimal impuesto, decimal multa, decimal honorarios, decimal total, string recibo, DateTime fecha)
         {
             Nit = nit;
             Año = año;
@@ -43,18 +43,18 @@ namespace ContabilidadPymes.Clases
             Fecha = fecha;
         }
 
-        public void ParametrosBusqueda(int nit, string recibo)
+        public void ParametrosBusqueda(string nit, string recibo)
         {
             Nit = nit;
             Recibo = recibo;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public int año { get { return Año; } set { Año = value; } }
         public string mes { get { return Mes; } set { Mes = value; } }
         public decimal ventas { get { return Ventas; } set { Ventas = value; } }
@@ -72,7 +72,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarPagos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@año", SqlDbType.Int).Value = año;
             cmd.Parameters.Add("@mes", SqlDbType.VarChar).Value = mes;
             cmd.Parameters.Add("@ventas", SqlDbType.Decimal).Value = ventas;
@@ -92,7 +92,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarPagos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@año", SqlDbType.Int).Value = año;
             cmd.Parameters.Add("@mes", SqlDbType.VarChar).Value = mes;
             cmd.Parameters.Add("@ventas", SqlDbType.Decimal).Value = ventas;
@@ -112,7 +112,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarPagos", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@recibo", SqlDbType.VarChar).Value = recibo;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -124,7 +124,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarPagos", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@recibo", SqlDbType.VarChar).Value = recibo;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -141,13 +141,61 @@ namespace ContabilidadPymes.Clases
             fecha = Convert.ToDateTime(ds.Tables[0].Rows[0][9].ToString());            
         }
 
+        public bool RegistroEncontrado()
+        {
+            bool buscar;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("BuscarPagos", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@recibo", SqlDbType.VarChar).Value = recibo;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (ds.Tables[0].Rows.Count == 0)
+            {
+                buscar = false;
+            }
+            else
+            {
+                buscar = true;
+            }
+            cnn.Close();
+            return buscar;
+        }
+
+        public bool ValidacionDuplicadosPagos()
+        {
+            bool duplicado;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosPagos", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@recibo", SqlDbType.VarChar).Value = recibo; 
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (int.Parse(ds.Tables[0].Rows[0][0].ToString()) >= 1)
+            {
+                duplicado = true;
+            }
+            else
+            {
+                duplicado = false;
+            }
+            cnn.Close();
+            return duplicado;
+        }
+
         public DataSet Vista()
         {
             SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaPagos", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);

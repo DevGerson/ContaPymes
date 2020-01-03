@@ -13,6 +13,7 @@ using ContabilidadPymes.Controles;
 using MaterialDesignThemes.Wpf;
 using MaterialDesignThemes.Wpf.Converters;
 using MaterialDesignThemes.Wpf.Transitions;
+using RootLibrary.WPF.Localization;
 using System;
 using System.Diagnostics;
 using System.Windows;

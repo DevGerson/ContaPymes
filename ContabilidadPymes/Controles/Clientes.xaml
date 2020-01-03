@@ -1,0 +1,202 @@
+﻿<UserControl x:Class="ContabilidadPymes.Controles.Clientes"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ContabilidadPymes.Controles"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1366">
+    <Grid Background="#f2f2f2">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="57"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" HorizontalAlignment="Center">
+            <ToolBarTray Background="#f2f2f2">
+                <ToolBar
+                    Style="{DynamicResource MaterialDesignToolBar}"
+                    ClipToBounds="False"
+                    Background="#f2f2f2">
+                    <Button             
+                        Click="BtnNuevo_Click"
+                        IsEnabled="False"
+                        Name="btnNuevo"
+                        ToolTip="Nuevo">
+                        <materialDesign:PackIcon
+                            Kind="NewBox" />
+                    </Button>
+                    <Button  
+                        Click="BtnLimpiar_Click"
+                        IsEnabled="False"
+                        Name="btnLimpiar"
+                        ToolTip="Limpiar">
+                        <materialDesign:PackIcon
+                            Kind="Broom" />
+                    </Button>
+                    <Separator/>
+                    <Button        
+                        Click="BtnGuardar2_Click"
+                        IsEnabled="False"
+                        Name="btnGuardar2"
+                        ToolTip="Guardar">
+                        <materialDesign:PackIcon
+                            Kind="ContentSave" />
+                    </Button>
+                    <Button         
+                        Click="BtnEliminar_Click"
+                        IsEnabled="False"
+                        Name="btnEliminar"                        
+                        ToolTip="Eliminar">
+                        <materialDesign:PackIcon
+                            Kind="Delete" />
+                    </Button>
+                    <Button        
+                        Click="BtnEditar_Click"
+                        IsEnabled="False"
+                        Name="btnEditar"                        
+                        ToolTip="Editar">
+                        <materialDesign:PackIcon
+                            Kind="ModeEdit" />
+                    </Button>
+                    <Button   
+                        Click="BtnBuscar_Click"
+                        IsEnabled="False"
+                        Name="btnBuscar"                        
+                        ToolTip="Buscar">
+                        <materialDesign:PackIcon
+                            Kind="Search" />
+                    </Button>
+                    <Separator/>
+                    <Button      
+                        Click="BtnRefrescar_Click"
+                        IsEnabled="False"   
+                        Name="btnRefrescar"                        
+                        ToolTip="Actualizar">
+                        <materialDesign:PackIcon
+                            Kind="Refresh" />
+                    </Button>
+                    <Button
+                        IsEnabled="False"
+                        ToolTip="Lista">
+                        <materialDesign:PackIcon
+                            Kind="ViewList" />
+                    </Button>
+                    <Separator/>
+                    <Button
+                        IsEnabled="False"
+                        ToolTip="Libro Diario">
+                        <materialDesign:PackIcon
+                            Kind="ChartAreasplineVariant" />
+                    </Button>
+                    <Button
+                        IsEnabled="False"
+                        ToolTip="Reporte Diario">
+                        <materialDesign:PackIcon
+                            Kind="FileReport" />
+                    </Button>
+                    <Separator/>
+                </ToolBar>
+            </ToolBarTray>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <TextBlock
+                    Margin="40 15 0 15"
+                    FontSize="30"
+                    FontWeight="SemiBold">Clientes</TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <Grid Grid.Column="0">
+                <StackPanel Width="300" Margin="50 0 0 0" HorizontalAlignment="Left">
+                    <TextBlock
+                        Padding="0"
+                        Margin="0 20 0 20"
+                        FontSize="20"
+                        FontWeight="SemiBold">
+                        Detalle
+                    </TextBlock>
+                    <StackPanel>
+                        <TextBox
+                            IsEnabled="False"
+                            Name="txtNit"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            FontSize="14"
+                            TextAlignment="Right">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    Margin="0 15 0 0">
+                                    <materialDesign:PackIcon
+                                        Kind="AccessPoint" Height="16" Width="16" VerticalAlignment="Bottom"
+                                        Margin="0 0 5 0"/>
+                                    <TextBlock FontSize="13">
+                                        NIT
+                                    </TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </StackPanel>
+                    <TextBox
+                        IsEnabled="False"
+                        Name="txtCliente"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        FontSize="14"
+                        TextAlignment="Right">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel
+                            Orientation="Horizontal"
+                            Margin="0 15 0 0">
+                                <materialDesign:PackIcon
+                                Kind="AccessPoint" Height="16" Width="16" VerticalAlignment="Bottom"
+                                Margin="0 0 5 0"/>
+                                <TextBlock FontSize="13">
+                                    Nombre clientes
+                                </TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
+                    <StackPanel Margin="0 25 0 0">
+                        <Button
+                            Click="BtnGuardar_Click"
+                            HorizontalAlignment="Right"
+                            IsEnabled="False"
+                            Name="btnGuardar"                            
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Width="100"
+                            Height="30"
+                            Padding="0"
+                            Margin="30 0 0 0"
+                            ToolTip="Guardar"
+                            VerticalAlignment="Bottom">
+                            Guardar
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <StackPanel Width="800" Margin="0 0 0 0" HorizontalAlignment="Left" Background="#f2f2f2">
+                    <DataGrid CanUserResizeColumns="False" SelectionUnit="Cell" Height="480" Name="VistaData" AutoGenerateColumns="False" Background="#f2f2f2" IsReadOnly="True" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Path=nit}" Header="NIT" Width="120"/>
+                            <DataGridTextColumn Binding="{Binding Path=Clientes}" Header="Nombre Proveedor" Width="400"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+    </Grid>
+</UserControl>

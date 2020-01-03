@@ -97,7 +97,7 @@ namespace ContabilidadPymes.Controles
                         BloqueoTxt(false);
                         BloqueoBusquedaTxt(true);
                         LimpiarTxt();
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
+                        BloqueoBusquedaBtn(false);
                         BloqueoBtnGuardar(false);
                         ModoBusqueda = true;
                         //Focus en Fecha
@@ -125,6 +125,7 @@ namespace ContabilidadPymes.Controles
                 {
                     ModoBusqueda = false;
                     BloqueoTxt(true);
+                    BloqueoBtnGuardar(true);
                 }
                 else
                 {
@@ -198,7 +199,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassImpuestos cImpuestos = new ClassImpuestos();
-                cImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                cImpuestos.ParametrosBusqueda(combo_nit.SelectedValue.ToString().Trim(), txt_formulario.Text.Trim());
                 if (cImpuestos.ValidacionDuplicadosImpuestos() == false)
                 {
                     Ingresar();
@@ -222,7 +223,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassImpuestos cImpuestos = new ClassImpuestos();
-                cImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                cImpuestos.ParametrosBusqueda(combo_nit.SelectedValue.ToString().Trim(), txt_formulario.Text.Trim());
                 if (cImpuestos.ValidacionDuplicadosImpuestos() == false)
                 {
                     //Ingresa los datos
@@ -288,7 +289,7 @@ namespace ContabilidadPymes.Controles
         {
             if (txt_formulario.Text != "")
             {
-                classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString().Trim()), txt_formulario.Text.Trim());
+                classImpuestos.ParametrosBusqueda(combo_nit.SelectedValue.ToString().Trim(), txt_formulario.Text.Trim());
                 if (classImpuestos.RegistroEncontrado() == true)
                 {
                     Busqueda();
@@ -311,27 +312,27 @@ namespace ContabilidadPymes.Controles
 
         public void Ingresar()
         {
-            classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
+            classImpuestos.ParametrosImpuestos(combo_nit.SelectedValue.ToString(), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
                 Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
             classImpuestos.IngresarImpuesto();
         }
 
         public void Modificar()
         {
-            classImpuestos.ParametrosImpuestos(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
+            classImpuestos.ParametrosImpuestos(combo_nit.SelectedValue.ToString(), Convert.ToDecimal(txt_ventas.Text.Trim()), Convert.ToDecimal(txt_impuesto.Text.Trim()),
                 Convert.ToDecimal(txt_multa.Text.Trim()), txt_formulario.Text.Trim(), txt_acceso.Text.Trim());
             classImpuestos.ModificarImpuesto();
         }
 
         public void Eliminar()
         {
-            classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
+            classImpuestos.ParametrosBusqueda(combo_nit.SelectedValue.ToString(), txt_formulario.Text.Trim());
             classImpuestos.EliminarImpuesto();
         }
 
         public void Busqueda()
         {
-            classImpuestos.ParametrosBusqueda(Convert.ToInt32(combo_nit.SelectedValue.ToString()), txt_formulario.Text.Trim());
+            classImpuestos.ParametrosBusqueda(combo_nit.SelectedValue.ToString(), txt_formulario.Text.Trim());
             classImpuestos.BuscarImpuesto();
             txt_ventas.Text = classImpuestos.ventas.ToString();
             txt_impuesto.Text = classImpuestos.impuesto.ToString();
@@ -342,7 +343,7 @@ namespace ContabilidadPymes.Controles
 
         public void Vista()
         {       
-            classImpuestos.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
+            classImpuestos.ParametrosVista(combo_nit.SelectedValue.ToString());
             VistaData.ItemsSource = null;
             VistaData.ItemsSource = classImpuestos.Vista().Tables[0].DefaultView;                      
         }

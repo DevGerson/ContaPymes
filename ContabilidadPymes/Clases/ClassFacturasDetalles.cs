@@ -11,7 +11,7 @@ namespace ContabilidadPymes.Clases
     public class ClassFacturasDetalles
     {
         DataSet ds;
-        private int Nit { get; set; }
+        private string Nit { get; set; }
         private string Tipo { get; set; }
         private int Cantidad { get; set; }
         private string Serie { get; set; }
@@ -20,14 +20,14 @@ namespace ContabilidadPymes.Clases
         private string Resolucion { get; set; }
         private DateTime Creacion { get; set; }
         private DateTime Vigencia { get; set; }
-        private int Imprenta { get; set; }
+        private string Imprenta { get; set; }
 
         public ClassFacturasDetalles()
         {
 
         }
 
-        public void ParametrosFacturas(int nit, string tipo, int cantidad, string serie, int del, int al, string resolucion, DateTime creacion, DateTime vigencia, int imprenta)
+        public void ParametrosFacturas(string nit, string tipo, int cantidad, string serie, int del, int al, string resolucion, DateTime creacion, DateTime vigencia, string imprenta)
         {
             Nit = nit;
             Tipo = tipo;
@@ -41,24 +41,24 @@ namespace ContabilidadPymes.Clases
             Imprenta = imprenta;
         }
 
-        public void ParametrosBusqueda(int nit, string resolucion)
+        public void ParametrosBusqueda(string nit, string resolucion)
         {
             Nit = nit;
             Resolucion = resolucion;
         }
 
-        public void ParametrosListSeries(int nit, string tipo)
+        public void ParametrosListSeries(string nit, string tipo)
         {
             Nit = nit;
             Tipo = tipo;
         }
 
-        public void ParametrosVista(int nit)
+        public void ParametrosVista(string nit)
         {
             Nit = nit;
         }
 
-        public int nit { get { return Nit; } set { Nit = value; } }
+        public string nit { get { return Nit; } set { Nit = value; } }
         public string tipo { get { return Tipo; } set { Tipo = value; } }
         public string serie { get { return Serie; } set { Serie = value; } }
         public int cantidad { get { return Cantidad; } set { Cantidad = value; } }
@@ -67,7 +67,7 @@ namespace ContabilidadPymes.Clases
         public string resolucion { get { return Resolucion; } set { Resolucion = value; } }
         public DateTime creacion { get { return Creacion; } set { Creacion = value; } }
         public DateTime vigencia { get { return Vigencia; } set { Vigencia = value; } }
-        public int imprenta { get { return Imprenta; } set { Imprenta = value; } }
+        public string imprenta { get { return Imprenta; } set { Imprenta = value; } }
 
         public void Ingresar()
         {
@@ -75,7 +75,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("IngresarFacturasDetalles", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             cmd.Parameters.Add("@cantidad", SqlDbType.Int).Value = cantidad;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
@@ -84,7 +84,7 @@ namespace ContabilidadPymes.Clases
             cmd.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             cmd.Parameters.Add("@creacion", SqlDbType.Date).Value = creacion;
             cmd.Parameters.Add("@vigencia", SqlDbType.Date).Value = vigencia;
-            cmd.Parameters.Add("@imprenta", SqlDbType.Int).Value = imprenta;
+            cmd.Parameters.Add("@imprenta", SqlDbType.BigInt).Value = imprenta;
             cmd.ExecuteNonQuery();
             cnn.Close();
         }
@@ -95,7 +95,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("ModificarFacturasDetalles", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             cmd.Parameters.Add("@cantidad", SqlDbType.Int).Value = cantidad;
             cmd.Parameters.Add("@serie", SqlDbType.VarChar).Value = serie;
@@ -104,7 +104,7 @@ namespace ContabilidadPymes.Clases
             cmd.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             cmd.Parameters.Add("@creacion", SqlDbType.Date).Value = creacion;
             cmd.Parameters.Add("@vigencia", SqlDbType.Date).Value = vigencia;
-            cmd.Parameters.Add("@imprenta", SqlDbType.Int).Value = imprenta;
+            cmd.Parameters.Add("@imprenta", SqlDbType.BigInt).Value = imprenta;
             cmd.ExecuteNonQuery();
             cnn.Close();
         }
@@ -115,7 +115,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlCommand cmd = new SqlCommand("EliminarFacturasDetalles", cnn);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            cmd.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             cmd.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             cmd.ExecuteNonQuery();
             cnn.Close();
@@ -128,7 +128,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("BuscarFacturasDetalles", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -141,7 +141,32 @@ namespace ContabilidadPymes.Clases
             resolucion = ds.Tables[0].Rows[0][6].ToString();
             vigencia = Convert.ToDateTime(ds.Tables[0].Rows[0][7].ToString());
             creacion = Convert.ToDateTime(ds.Tables[0].Rows[0][8].ToString());
-            imprenta = Convert.ToInt32(ds.Tables[0].Rows[0][9].ToString());
+            imprenta = ds.Tables[0].Rows[0][9].ToString();
+            cnn.Close();
+        }
+
+        public bool FacturaEncontrada()
+        {
+            bool buscar;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("BuscarFacturasDetalles", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (ds.Tables[0].Rows.Count==0)
+            {
+                buscar = false;
+            }
+            else
+            {
+                buscar = true;
+            }
+            cnn.Close();
+            return buscar;
         }
 
         public DataSet Vista()
@@ -150,7 +175,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("VistaFacturasDetalles", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -164,7 +189,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ListTiposFacturaDetalles", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
             adp.Fill(ds);
@@ -178,7 +203,7 @@ namespace ContabilidadPymes.Clases
             cnn.Open();
             SqlDataAdapter adp = new SqlDataAdapter("ListSeriesFacturaDetalles", cnn);
             adp.SelectCommand.CommandType = CommandType.StoredProcedure;
-            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.Int).Value = nit;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
             adp.SelectCommand.Parameters.Add("@tipo_doc", SqlDbType.VarChar).Value = tipo;
             adp.SelectCommand.ExecuteNonQuery();
             ds = new DataSet();
@@ -186,6 +211,30 @@ namespace ContabilidadPymes.Clases
             cnn.Close();
             return ds;
         }
-            
+
+        public bool ValidacionDuplicadosFacturasDetalles()
+        {
+            bool duplicado;
+            SqlConnection cnn = new SqlConnection(ConexionDataBase.InstacianConexion.StringConexion);
+            cnn.Open();
+            SqlDataAdapter adp = new SqlDataAdapter("ValidacionDuplicadosFacturasDetalles", cnn);
+            adp.SelectCommand.CommandType = CommandType.StoredProcedure;
+            adp.SelectCommand.Parameters.Add("@nit", SqlDbType.BigInt).Value = nit;
+            adp.SelectCommand.Parameters.Add("@resolucion", SqlDbType.VarChar).Value = resolucion;
+            adp.SelectCommand.ExecuteNonQuery();
+            ds = new DataSet();
+            adp.Fill(ds);
+            if (int.Parse(ds.Tables[0].Rows[0][0].ToString())>=1)
+            {
+                duplicado = true;
+            }
+            else
+            {
+                duplicado = false;
+            }
+            cnn.Close();
+            return duplicado;
+        }
+
     }
 }

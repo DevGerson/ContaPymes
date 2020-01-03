@@ -119,7 +119,7 @@ namespace ContabilidadPymes.Controles
             else
             {
                 ClassHonorarios cHonorarios = new ClassHonorarios();
-                cHonorarios.ParametrosVista(int.Parse(combo_nit.SelectedValue.ToString()));
+                cHonorarios.ParametrosVista(combo_nit.SelectedValue.ToString());
                 if (cHonorarios.ValidacionDuplicadosHonorarios()==false)
                 {
                     Ingresar();
@@ -157,19 +157,19 @@ namespace ContabilidadPymes.Controles
 
         public void Ingresar()
         {
-            classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_honorario.Text.Trim()));
+            classHonorarios.ParametrosHonorarios(combo_nit.SelectedValue.ToString(), Convert.ToDecimal(txt_honorario.Text.Trim()));
             classHonorarios.Ingresar();
         }
 
         public void Editar()
         {
-            classHonorarios.ParametrosHonorarios(Convert.ToInt32(combo_nit.SelectedValue.ToString()), Convert.ToDecimal(txt_honorario.Text.Trim()));
+            classHonorarios.ParametrosHonorarios(combo_nit.SelectedValue.ToString(), Convert.ToDecimal(txt_honorario.Text.Trim()));
             classHonorarios.Modificar();
         }
 
         public void Eliminar()
         {
-            classHonorarios.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
+            classHonorarios.ParametrosVista(combo_nit.SelectedValue.ToString());
             classHonorarios.Eliminar();
             Vista();
             LimpiarTxt();
@@ -180,7 +180,7 @@ namespace ContabilidadPymes.Controles
 
         public void Buscar()
         {
-            classHonorarios.ParametrosVista(Convert.ToInt32(combo_nit.SelectedValue.ToString()));
+            classHonorarios.ParametrosVista(combo_nit.SelectedValue.ToString());
             if (classHonorarios.VerificarHonorario()==false)
             {
                 txt_honorario.Text = "";

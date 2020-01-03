@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
+using ContabilidadPymes.Ventanas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -21,8 +22,16 @@ namespace ContabilidadPymes.Controles
     /// </summary>
     public partial class Contribuyente : UserControl
     {
-        ClassContribuyente classContribuyente = new ClassContribuyente();
+        #region Variables
+
         bool ModoBusqueda;
+        Validaciones validaciones = new Validaciones();
+        ClassMensajes classMensajes = new ClassMensajes();
+        ClassContribuyente classContribuyente = new ClassContribuyente();
+
+        #endregion
+
+        #region Constructor
 
         public Contribuyente()
         {
@@ -32,9 +41,15 @@ namespace ContabilidadPymes.Controles
             BloqueoBtnBusqueda(false);
         }
 
+        #endregion
+
+        #region Controles
+
         private void Btn_nuevo_Click(object sender, RoutedEventArgs e)
         {
             LimpiarTxt();
+            ModoBusqueda = false;
+            BloqueoTxt(true);
             BloqueoBtnBusqueda(false);
             BloqueoBtnGuardar(true);
             txt_nit.Focus();
@@ -47,26 +62,17 @@ namespace ContabilidadPymes.Controles
 
         private void Btn_guardar_Click(object sender, RoutedEventArgs e)
         {
-            Ingresar();
-            LimpiarTxt();
+            ValidacionIngresar();
         }
 
         private void Btn_eliminar_Click(object sender, RoutedEventArgs e)
         {
-            Eliminar();
-            LimpiarTxt();
-
-            BloqueoBtnBusqueda(false);
-            BloqueoBtnGuardar(true);
+            ValidacionEliminar();
         }
 
         private void Btn_editar_Click(object sender, RoutedEventArgs e)
         {
-            Modificar();
-            LimpiarTxt();
-
-            BloqueoBtnBusqueda(false);
-            BloqueoBtnGuardar(true);
+            ValidacionModificar();
         }
 
         private void Buscar_Click(object sender, RoutedEventArgs e)
@@ -86,26 +92,15 @@ namespace ContabilidadPymes.Controles
                         //Bloquea los textbox para resaltar los campos a ingresar
                         BloqueoTxt(false);
                         BloqueoTxtBusqueda(true);
-                        LimpiarTxt();
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
+                        BloqueoBtnBusqueda(false);
                         BloqueoBtnGuardar(false);
                         ModoBusqueda = true;
-                        //Focus en Fecha
+                        LimpiarTxt();
                         txt_nit.Focus();
                     }
                     else if (messageBoxResult == MessageBoxResult.Yes)
                     {
-                        //Ingresa los datos
-                        Ingresar();
-                        LimpiarTxt();
-                        //Bloquea los textbox para resaltar los campos a ingresar
-                        BloqueoTxt(false);
-                        BloqueoTxtBusqueda(true);
-                        //Variable para verificar si esta en modo busqueda y Bloqueo de Botones o Desbloqueo
-                        BloqueoBtnGuardar(false);
-                        ModoBusqueda = true;
-                        //Focus en fecha
-                        txt_nit.Focus();
+                        ValidacionIngresarBusqueda();
                     }
                 }
                 else
@@ -125,21 +120,46 @@ namespace ContabilidadPymes.Controles
                 {
                     ModoBusqueda = false;
                     BloqueoTxt(true);
+                    BloqueoBtnGuardar(true);
                 }
                 else
                 {
-                    ModoBusqueda = false;
-                    Buscar();
-                    BloqueoTxt(true);
-                    BloqueoBtnGuardar(false);
-                    BloqueoBtnBusqueda(true);
+                    ValidacionBusqueda();
                 }
 
             }
         }
 
+        private void Reporte_contribuyente_Click(object sender, RoutedEventArgs e)
+        {
+            ListaContribuyentes listaContribuyentes = new ListaContribuyentes();
+            listaContribuyentes.Show();
+        }
+
+        private void Txt_nit_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Txt_cui_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Txt_telefono_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void Txt_usuario_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        #endregion
 
         #region Funciones
+
         public void LimpiarTxt()
         {
             txt_nit.Text = "";
@@ -155,11 +175,119 @@ namespace ContabilidadPymes.Controles
             txt_contraseña.Text = "";
         }
 
+        public void ValidacionIngresar()
+        {
+            if (txt_nit.Text!=""||txt_razon.Text!=""||txt_cui.Text!=""||txt_nombre.Text!=""||txt_telefono.Text!=""||txt_direccion.Text!=""||txt_municipio.Text!=""||txt_departamento.Text!=""||txt_usuario.Text!=""||txt_contraseña.Text!="")
+            {
+                classContribuyente.ParametrosBusqueda(txt_nit.Text.Trim());
+                if (classContribuyente.ValidacionDuplicadosContribuyentes()==false)
+                {
+                    Ingresar();
+                    LimpiarTxt();
+                    classMensajes.MensajesCortos("Exito", "Se registro un nuevo contribuyente.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro duplicado.");
+                }
+ 
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error","Campos vacios.");
+            }
+        }
+
+        public void ValidacionIngresarBusqueda()
+        {
+            if (txt_nit.Text!=""||txt_razon.Text!=""||txt_cui.Text!=""||txt_nombre.Text!=""||txt_telefono.Text!=""||txt_direccion.Text!=""||txt_municipio.Text!=""||txt_departamento.Text!=""||txt_usuario.Text!=""||txt_contraseña.Text!="")
+            {
+                classContribuyente.ParametrosBusqueda(txt_nit.Text.Trim());
+                if (classContribuyente.ValidacionDuplicadosContribuyentes()==false)
+                {
+                    Ingresar();                                       
+                    BloqueoTxt(false);
+                    BloqueoTxtBusqueda(true);                    
+                    BloqueoBtnGuardar(false);
+                    ModoBusqueda = true;
+                    LimpiarTxt();                    
+                    txt_nit.Focus();
+                    classMensajes.MensajesCortos("Exito", "Se registro un nuevo contribuyente.");
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "Registro duplicado.");
+                }
+ 
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error","Campos vacios.");
+            }
+        }
+
+        public void ValidacionModificar()
+        {
+            if (txt_nit.Text != "" || txt_razon.Text != "" || txt_cui.Text != "" || txt_nombre.Text != "" || txt_telefono.Text != "" || txt_direccion.Text != "" || txt_municipio.Text != "" || txt_departamento.Text != "" || txt_usuario.Text != "" || txt_contraseña.Text != "")
+            {
+                Modificar();
+                LimpiarTxt();
+                BloqueoBtnBusqueda(false);
+                BloqueoBtnGuardar(true);
+                classMensajes.MensajesCortos("Exito", "Se modifico el registro.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionEliminar()
+        {
+            if (txt_nit.Text != "")
+            {
+                Eliminar();
+                LimpiarTxt();
+                BloqueoBtnBusqueda(false);
+                BloqueoBtnGuardar(true);
+                classMensajes.MensajesCortos("Exito", "Se elimino el registro.");
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
+        public void ValidacionBusqueda()
+        {
+            if (txt_nit.Text != "")
+            {
+                classContribuyente.ParametrosBusqueda(txt_nit.Text.Trim());
+                if (classContribuyente.SiExiste()==true)
+                {
+                    Buscar();
+                    ModoBusqueda = false;
+                    BloqueoTxt(true);
+                    BloqueoBtnGuardar(false);
+                    BloqueoBtnBusqueda(true);
+                }
+                else
+                {
+                    classMensajes.MensajesCortos("Error", "No existe el registro.");
+                }
+             
+            }
+            else
+            {
+                classMensajes.MensajesCortos("Error", "Campos vacios.");
+            }
+        }
+
         public void Ingresar()
         {
-            int nit = Convert.ToInt32(txt_nit.Text.Trim());
+            string nit = txt_nit.Text.Trim();
             string razon = txt_razon.Text.Trim();
-            int cui = Convert.ToInt32(txt_cui.Text.Trim());
+            string cui = txt_cui.Text.Trim();
             string nombre_comercial = txt_nombre.Text.Trim();
             int telefono = Convert.ToInt32(txt_telefono.Text.Trim());
             int estado = 0;
@@ -174,7 +302,7 @@ namespace ContabilidadPymes.Controles
             string direccion = txt_direccion.Text.Trim();
             string municipio = txt_municipio.Text.Trim();
             string departamento = txt_departamento.Text.Trim();
-            int usuario = Convert.ToInt32(txt_usuario.Text.Trim());
+            string usuario = txt_usuario.Text.Trim();
             string password = txt_contraseña.Text.Trim();
 
             classContribuyente.NuevoContribuyente(nit,razon,cui,nombre_comercial,telefono,estado,direccion,municipio,departamento,usuario,password);
@@ -184,9 +312,9 @@ namespace ContabilidadPymes.Controles
 
         public void Modificar()
         {
-            int nit = Convert.ToInt32(txt_nit.Text.Trim());
+            string nit = txt_nit.Text.Trim();
             string razon = txt_razon.Text.Trim();
-            int cui = Convert.ToInt32(txt_cui.Text.Trim());
+            string cui = txt_cui.Text.Trim();
             string nombre_comercial = txt_nombre.Text.Trim();
             int telefono = Convert.ToInt32(txt_telefono.Text.Trim());
             int estado = 0;
@@ -201,7 +329,7 @@ namespace ContabilidadPymes.Controles
             string direccion = txt_direccion.Text.Trim();
             string municipio = txt_municipio.Text.Trim();
             string departamento = txt_departamento.Text.Trim();
-            int usuario = Convert.ToInt32(txt_usuario.Text.Trim());
+            string usuario = txt_usuario.Text.Trim();
             string password = txt_contraseña.Text.Trim();
 
             classContribuyente.NuevoContribuyente(nit, razon, cui, nombre_comercial, telefono, estado, direccion, municipio, departamento, usuario, password);
@@ -210,17 +338,17 @@ namespace ContabilidadPymes.Controles
 
         public void Eliminar()
         {
-            int nit = Convert.ToInt32(txt_nit.Text.Trim());
+            string nit = txt_nit.Text.Trim();
 
-            classContribuyente.BuscarContribuyente(nit);
+            classContribuyente.ParametrosBusqueda(nit);
             classContribuyente.Eliminar();
         }
 
         public void Buscar()
         {
-            int nit = Convert.ToInt32(txt_nit.Text.Trim());
+            string nit = txt_nit.Text.Trim();
 
-            classContribuyente.BuscarContribuyente(nit);
+            classContribuyente.ParametrosBusqueda(nit);
             classContribuyente.Buscar();
 
             txt_razon.Text = classContribuyente.razon_social;
@@ -265,6 +393,7 @@ namespace ContabilidadPymes.Controles
             btn_eliminar.IsEnabled = Estado;
             btn_editar.IsEnabled = Estado;
             buscar.IsEnabled = Estado;
+            reporte_contribuyente.IsEnabled = Estado;
         }
 
         public void BloqueoBtnBusqueda(bool Estado)
@@ -282,11 +411,7 @@ namespace ContabilidadPymes.Controles
         {
             btn_guardar.IsEnabled = Estado;
         }
+
         #endregion
-
-        private void Reporte_contribuyente_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
