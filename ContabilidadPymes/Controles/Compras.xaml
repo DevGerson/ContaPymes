@@ -213,10 +213,7 @@
                         <ComboBoxItem>
                             Crédito
                         </ComboBoxItem>
-                    </ComboBox>
-
-
-                    
+                    </ComboBox>                    
                     <TextBox
                         PreviewTextInput="Txt_serie_PreviewTextInput"
                         TabIndex="4"

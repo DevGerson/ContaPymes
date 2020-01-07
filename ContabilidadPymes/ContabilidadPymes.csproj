@@ -81,11 +81,45 @@
     </ApplicationDefinition>
     <Compile Include="Clases\ClassClientes.cs" />
     <Compile Include="Clases\ClassFacturas.cs" />
+    <Compile Include="Clases\ClassFiltros.cs" />
     <Compile Include="Clases\ClassMensajes.cs" />
     <Compile Include="Clases\ClassProveedor.cs" />
     <Compile Include="Clases\Validaciones.cs" />
     <Compile Include="Controles\Clientes.xaml.cs">
       <DependentUpon>Clientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\FormatoReporte.xaml.cs">
+      <DependentUpon>FormatoReporte.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteClientes.xaml.cs">
+      <DependentUpon>ReporteClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteCompras.xaml.cs">
+      <DependentUpon>ReporteCompras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteFacturasDetalles.xaml.cs">
+      <DependentUpon>ReporteFacturasDetalles.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteFacturasSeries.xaml.cs">
+      <DependentUpon>ReporteFacturasSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteHonorarios.xaml.cs">
+      <DependentUpon>ReporteHonorarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteImpuesto.xaml.cs">
+      <DependentUpon>ReporteImpuesto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteLibros.xaml.cs">
+      <DependentUpon>ReporteLibros.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReportePagos.xaml.cs">
+      <DependentUpon>ReportePagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteProveedor.xaml.cs">
+      <DependentUpon>ReporteProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportes\ReporteVentas.xaml.cs">
+      <DependentUpon>ReporteVentas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controles\Facturas.xaml.cs">
       <DependentUpon>Facturas.xaml</DependentUpon>
@@ -111,6 +145,9 @@
     <Compile Include="Ventanas\vtnMensajes.xaml.cs">
       <DependentUpon>vtnMensajes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\vtnReporteCompras.xaml.cs">
+      <DependentUpon>vtnReporteCompras.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controles\Clientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +161,50 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controles\Contribuyente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\FormatoReporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteCompras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteFacturasDetalles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteFacturasSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteHonorarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteImpuesto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteLibros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReportePagos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportes\ReporteVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Ventanas\vtnMensajes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReporteCompras.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

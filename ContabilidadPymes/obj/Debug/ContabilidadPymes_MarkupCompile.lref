@@ -4,6 +4,13 @@ FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\Clien
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\Compras.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ConciliacionesPagos.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\Contribuyente.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\FormatoReporte.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteClientes.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteCompras.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteFacturasDetalles.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteFacturasSeries.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteProveedor.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteVentas.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\Facturas.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\FacturasDetalles.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\Honorarios.xaml;;
@@ -20,4 +27,9 @@ FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Ventanas\Factur
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Ventanas\ListaContribuyentes.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Ventanas\VtnEspera.xaml;;
 FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Ventanas\vtnMensajes.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Ventanas\vtnReporteCompras.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteLibros.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReportePagos.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteHonorarios.xaml;;
+FC:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\Controles\ControlReportes\ReporteImpuesto.xaml;;
 

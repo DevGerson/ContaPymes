@@ -7,22 +7,11 @@
         xmlns:local="clr-namespace:ContabilidadPymes"
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="ContabilidadPymes.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="720" Width="1366" WindowStartupLocation="CenterScreen">
-    <Grid>
+        Title="ContaPymes" Height="720" Width="1366" WindowStartupLocation="CenterScreen" SizeChanged="Window_SizeChanged">
+    <Grid Name="GridContenedor">
         <materialDesign:DrawerHost>
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <StackPanel Orientation="Vertical" Margin="16" Width="300" >
-                    <!--Menu Desplegable-->
-                    <!--<Button
-                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                        CommandParameter="{x:Static Dock.Left}"
-                        Margin="4"
-                        HorizontalAlignment="Center"
-                        Style="{DynamicResource MaterialDesignFlatButton}">
-                        CLOSE THIS
-                    </Button>-->
-
-
+                <StackPanel MaxHeight="720" Orientation="Vertical" Margin="16" Width="300" >
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
@@ -92,11 +81,11 @@
                             </StackPanel>
                         </Grid>
 
-                        <Grid Grid.Row="2">
-                            <DockPanel>
-                                <ScrollViewer DockPanel.Dock="Bottom"  Margin="7 30 0 0" MaxHeight="520" VerticalScrollBarVisibility="Auto">
+                        <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <StackPanel Margin="0 0 0 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <ScrollViewer Name="ScrollMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="7 30 0 10"  VerticalScrollBarVisibility="Auto">
                                     <!--Container Fist-->
-                                    <StackPanel>
+                                    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                         <StackPanel>
                                             <TextBlock
                                             Margin="0 15 0 15"
@@ -140,6 +129,8 @@
                                                 <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Clientes"/></TextBlock>
                                             </Button>
                                         </ListViewItem>
+
+
 
                                         <StackPanel>
                                             <TextBlock
@@ -193,7 +184,6 @@
                                             FontWeight="SemiBold"><Run Text="Libros"/></TextBlock>
                                         </StackPanel>
 
-
                                         <!--Boton-->
                                         <ListViewItem
                                             Padding="0"
@@ -213,83 +203,12 @@
                                             </Button>
                                         </ListViewItem>
 
-
-
-                                        <StackPanel
-                                        Margin="0 15 0 15">
-                                            <TextBlock
-                                            FontSize="13"
-                                            FontWeight="SemiBold"><Run Text="Honorarios y Pagos"/></TextBlock>
-                                        </StackPanel>
-
-
-
-
-                                        <!--Boton-->
-                                        <ListViewItem
-                                            Padding="0"
-                                            Margin="0"
-                                            Width="270"
-                                            Height="40">
-                                            <Button
-                                                x:Name="bt_impuestos"
-                                                Click="Bt_impuestos_Click"
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                Height="40"
-                                                Width="270"
-                                                Padding="0"
-                                                Margin="0"
-                                                HorizontalContentAlignment="Left">
-                                                <TextBlock Margin="15 0 0 0" FontWeight="Light" ><Run Text="Impuestos"/></TextBlock>
-                                            </Button>
-                                        </ListViewItem>
-
-                                        <!--Boton-->
-                                        <ListViewItem
-                                            Padding="0"
-                                            Margin="0"
-                                            Width="270"
-                                            Height="40">
-                                            <Button
-                                                x:Name="bt_honorarios"
-                                                Click="Bt_honorarios_Click"
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                Height="40"
-                                                Width="270"
-                                                Padding="0"
-                                                Margin="0"
-                                                HorizontalContentAlignment="Left">
-                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Honorarios"/></TextBlock>
-                                            </Button>
-                                        </ListViewItem>
-
-                                        <!--Boton-->
-                                        <ListViewItem
-                                            Padding="0"
-                                            Margin="0"
-                                            Width="270"
-                                            Height="40">
-                                            <Button
-                                                x:Name="bt_pagos"
-                                                Click="Bt_pagos_Click"
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                Height="40"
-                                                Width="270"
-                                                Padding="0"
-                                                Margin="0"
-                                                HorizontalContentAlignment="Left">
-                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Pago Honorarios"/></TextBlock>
-                                            </Button>
-                                        </ListViewItem>
-
                                         <StackPanel
                                         Margin="0 15 0 15">
                                             <TextBlock
                                             FontSize="13"
                                             FontWeight="SemiBold"><Run Text="Facturas"/></TextBlock>
                                         </StackPanel>
-
-
 
                                         <!--Boton-->
                                         <ListViewItem
@@ -310,6 +229,277 @@
                                             </Button>
                                         </ListViewItem>
 
+                                        <StackPanel
+                                        Margin="0 15 0 15">
+                                            <TextBlock
+                                            FontSize="13"
+                                            FontWeight="SemiBold"><Run Text="Honorarios"/></TextBlock>
+                                        </StackPanel>
+
+                                        <!--Boton-->
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                x:Name="bt_honorarios"
+                                                Click="Bt_honorarios_Click"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Honorarios"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <StackPanel
+                                        Margin="0 15 0 15">
+                                            <TextBlock
+                                            FontSize="13"
+                                            FontWeight="SemiBold"><Run Text="Pagos"/></TextBlock>
+                                        </StackPanel>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                x:Name="bt_pagos"
+                                                Click="Bt_pagos_Click"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Pagos"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <StackPanel
+                                        Margin="0 15 0 15">
+                                            <TextBlock
+                                            FontSize="13"
+                                            FontWeight="SemiBold"><Run Text="Impuesto"/></TextBlock>
+                                        </StackPanel>
+
+                                        <!--Boton-->
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                x:Name="bt_impuestos"
+                                                Click="Bt_impuestos_Click"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light" ><Run Text="Impuestos"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+
+                                        <StackPanel
+                                        Margin="0 15 0 15">
+                                            <TextBlock
+                                            FontSize="13"
+                                            FontWeight="SemiBold"><Run Text="Vistas"/></TextBlock>
+                                        </StackPanel>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                Name="btnReporteVentas"
+                                                Click="BtnReporteVentas_Click"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Ventas"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem                                            
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button                 
+                                                Name="btnReporteCompras"
+                                                Click="BtnReporteCompras_Click"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Compras"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                Click="BtnReporteClientes_Click"
+                                                Name="btnReporteClientes"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Clientes"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                Click="BtnReporteProveedor_Click"
+                                                Name="btnReporteProveedor"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Proveedores"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button   
+                                                Click="BtnVistaFacturas_Click"
+                                                Name="btnVistaFacturas"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Facturas Series"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button          
+                                                Click="BtnVistaFacturasDetalles_Click"
+                                                Name="btnVistaFacturasDetalles"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Facturas Habilitadas"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button     
+                                                Click="BtnVistaLibros_Click"
+                                                Name="btnVistaLibros"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Libros Habilitado"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button     
+                                                Click="BtnVistaPagos_Click"
+                                                Name="btnVistaPagos"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Pagos"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                Click="BtnVistaHonorarios_Click"
+                                                Name="btnVistaHonorarios"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Honorarios"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <ListViewItem
+                                            Padding="0"
+                                            Margin="0"
+                                            Width="270"
+                                            Height="40">
+                                            <Button
+                                                Click="BtnVistaImpuestos_Click"
+                                                Name="btnVistaImpuestos"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Height="40"
+                                                Width="270"
+                                                Padding="0"
+                                                Margin="0"
+                                                HorizontalContentAlignment="Left">
+                                                <TextBlock Margin="15 0 0 0" FontWeight="Light"><Run Text="Vista Impuestos"/></TextBlock>
+                                            </Button>
+                                        </ListViewItem>
+
+                                        <StackPanel
+                                        Margin="0 15 0 15">
+                                            <TextBlock
+                                            FontSize="13"
+                                            FontWeight="SemiBold"><Run Text="Reportes"/></TextBlock>
+                                        </StackPanel>
 
                                         <StackPanel
                                         Margin="0 15 0 15">
@@ -373,6 +563,7 @@
                                             Width="270"
                                             Height="40">
                                             <Button
+                                                Click="BtnAjsute_Click"
                                                 x:Name="btnAjsute"                                                
                                                 Style="{StaticResource MaterialDesignFlatButton}"
                                                 Height="40"
@@ -391,6 +582,7 @@
                                             Width="270"
                                             Height="40">
                                             <Button
+                                                Click="BtnInfo_Click"
                                                 x:Name="btnInfo"                                                
                                                 Style="{StaticResource MaterialDesignFlatButton}"
                                                 Height="40"
@@ -403,15 +595,9 @@
                                         </ListViewItem>
 
                                     </StackPanel>
-                                    <!--End Accounting-->
-
-
-                                    <!--End Container-->
-
                                 </ScrollViewer>
-                                <!--End ScrollViewer-->
-                            </DockPanel>
-
+                            </StackPanel>
+                                                           
                         </Grid>
                     </Grid>
                 </StackPanel>

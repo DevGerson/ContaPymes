@@ -30,7 +30,7 @@ namespace ContabilidadPymes.Controles
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
+        {               
             VistaData.ItemsSource = classContribuyente.Reporte().Tables[0].DefaultView;
         }
 

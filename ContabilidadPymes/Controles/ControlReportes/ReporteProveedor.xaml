@@ -1,0 +1,124 @@
+﻿<UserControl x:Class="ContabilidadPymes.Controles.ControlReportes.ReporteProveedor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:ContabilidadPymes.Controles.ControlReportes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="#f2f2f2">
+
+        <materialDesign:DrawerHost  
+            Margin="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            BorderThickness="2"
+            BorderBrush="{DynamicResource MaterialDesignDivider}">
+            <materialDesign:DrawerHost.TopDrawerContent>
+                <StackPanel>
+                    
+                </StackPanel>
+            </materialDesign:DrawerHost.TopDrawerContent>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <StackPanel Orientation="Horizontal" Margin="30 0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBox
+                            VerticalAlignment="Bottom"
+                            TabIndex="1"
+                            IsEnabled="True"
+                            Name="txtFechas"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            FontSize="14"
+                            Width="250"
+                            Margin="0 0 0 0">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel
+                                    Orientation="Horizontal"
+                                    Margin="0 0 0 0">
+                                    <materialDesign:PackIcon
+                                        Kind="AccessPoint" Height="16" Width="16" VerticalAlignment="Bottom"
+                                        Margin="0 0 5 0"/>
+                                    <TextBlock FontSize="13">
+                                        NIT
+                                    </TextBlock>
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <Button
+                            Click="BtnFiltros_Click"
+                            Name="btnFiltros"
+                            Padding="0"                            
+                            Width="50"
+                            Height="30"
+                            Margin="20 0 0 1"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Filtrar">
+                            <materialDesign:PackIcon Height="20" Width="20" Kind="Filter"/>
+                        </Button>
+                        <Button
+                            Click="BtnBorrarFiltros_Click"
+                            Name="btnBorrarFiltros"
+                            Padding="0"
+                            Width="50"
+                            Margin="5 0 0 0"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Quitar Filtros">
+                            <materialDesign:PackIcon Height="19" Width="19" Kind="FilterRemove"/>
+                        </Button>
+                        <Button
+                            Click="BtnActualizarBD_Click"
+                            Name="btnActualizarBD"
+                            Padding="0"
+                            Width="50"
+                            Margin="5 0 0 0"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Actualizar Reporte">
+                            <materialDesign:PackIcon Height="20" Width="20" Kind="DatabaseRefresh"/>
+                        </Button>
+                        <Button
+                            Name="btnImprimir"
+                            Padding="0"
+                            Width="50"
+                            Margin="0 0 0 0"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Imprimir">
+                            <materialDesign:PackIcon Height="20" Width="20" Kind="Printer"/>
+                        </Button>
+                        <Button
+                            Name="btnInfo"
+                            Padding="0"
+                            Width="50"
+                            Margin="0 0 0 0"
+                            VerticalAlignment="Bottom"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            ToolTip="Información">
+                            <materialDesign:PackIcon Height="20" Width="20" Kind="InformationVariant"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <DataGrid Height="auto" Width="auto" Margin="30 30 30 30" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" CanUserResizeColumns="False" SelectionUnit="Cell" Name="VistaData" AutoGenerateColumns="False" Background="#f2f2f2" IsReadOnly="False" CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Nit" Width="100" Binding="{Binding Path=nit}"/>
+                            <DataGridTextColumn Header="Nombre" Width="250" Binding="{Binding Path=proveedor}"/>
+                            <DataGridTextColumn Header="Creación" Width="100" Binding="{Binding Path=fechaCreacion, StringFormat=dd/MM/yyyy}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+
+            </Grid>
+        </materialDesign:DrawerHost>
+
+    </Grid>
+</UserControl>

@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\gerso\source\repos\ContabilidadPymes\ContabilidadPymes\App.xaml
-201656157944
+32-1260602729
 
-42-1507360982
+551822464685
 29-1733865775
-Controles\Clientes.xaml;Controles\Compras.xaml;Controles\ConciliacionesPagos.xaml;Controles\Contribuyente.xaml;Controles\Facturas.xaml;Controles\FacturasDetalles.xaml;Controles\Honorarios.xaml;Controles\Impuesto.xaml;Controles\LibrosHabilitados.xaml;Controles\Pagos.xaml;Controles\Proveedores.xaml;Controles\ReportContribuyente.xaml;Controles\Usuario.xaml;Controles\Usuario_Modificar.xaml;Controles\Ventas.xaml;MainWindow.xaml;Ventanas\FacturaSeries.xaml;Ventanas\ListaContribuyentes.xaml;Ventanas\VtnEspera.xaml;Ventanas\vtnMensajes.xaml;
+Controles\Clientes.xaml;Controles\Compras.xaml;Controles\ConciliacionesPagos.xaml;Controles\Contribuyente.xaml;Controles\ControlReportes\FormatoReporte.xaml;Controles\ControlReportes\ReporteClientes.xaml;Controles\ControlReportes\ReporteCompras.xaml;Controles\ControlReportes\ReporteFacturasDetalles.xaml;Controles\ControlReportes\ReporteFacturasSeries.xaml;Controles\ControlReportes\ReporteHonorarios.xaml;Controles\ControlReportes\ReporteImpuesto.xaml;Controles\ControlReportes\ReporteLibros.xaml;Controles\ControlReportes\ReportePagos.xaml;Controles\ControlReportes\ReporteProveedor.xaml;Controles\ControlReportes\ReporteVentas.xaml;Controles\Facturas.xaml;Controles\FacturasDetalles.xaml;Controles\Honorarios.xaml;Controles\Impuesto.xaml;Controles\LibrosHabilitados.xaml;Controles\Pagos.xaml;Controles\Proveedores.xaml;Controles\ReportContribuyente.xaml;Controles\Usuario.xaml;Controles\Usuario_Modificar.xaml;Controles\Ventas.xaml;MainWindow.xaml;Ventanas\FacturaSeries.xaml;Ventanas\ListaContribuyentes.xaml;Ventanas\VtnEspera.xaml;Ventanas\vtnMensajes.xaml;Ventanas\vtnReporteCompras.xaml;
 
-True
+False
 
