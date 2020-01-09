@@ -14,7 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
-using ContabilidadPymes.Ventanas;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -35,7 +36,6 @@ namespace ContabilidadPymes.Controles
         private ClassMensajes classMensajes = new ClassMensajes();
         private ClassProveedor classProveedor = new ClassProveedor();
         private ClassContribuyente classContribuyente = new ClassContribuyente();        
-
         #endregion
 
         #region Singleton
@@ -107,6 +107,8 @@ namespace ContabilidadPymes.Controles
             btn_guardar.IsEnabled = Estado;
             btn_contribuyentes.IsEnabled = Estado;
             btn_actualizar.IsEnabled = Estado;
+            ReporteCompras.IsEnabled = Estado;
+            btnVistaCompras.IsEnabled = Estado;
         }
 
         public void BloqueoBusquedaTxt(bool Estado)
@@ -467,6 +469,18 @@ namespace ContabilidadPymes.Controles
         private void Txt_factura_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             validaciones.ValidacionNumeroDeFacturas(e);
+        }
+
+        private void btnReporteCompras_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesCompras vtnReportesCompras = new vtnReportesCompras();
+            vtnReportesCompras.Show();
+        }
+
+        private void btnVistaCompras_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasCompras vtnVistasCompras = new vtnVistasCompras();
+            vtnVistasCompras.Show();
         }
 
         private void Txt_monto_PreviewTextInput(object sender, TextCompositionEventArgs e)

@@ -85,28 +85,32 @@
                         Name="btn_actualizar"                        
                         ToolTip="Actualizar">
                         <materialDesign:PackIcon
-                            Kind="Refresh" />
+                            Kind="DatabaseRefresh" />
                     </Button>
                     <Button
                         Name="btn_List"
                         Click="Button_Click"
                         IsEnabled="False"
-                        ToolTip="Nomenclatura SubCuentas">
+                        ToolTip="Actualizar Series">
                         <materialDesign:PackIcon
-                            Kind="ViewList" />
+                            Kind="Refresh" />
                     </Button>
                     <Separator/>
                     <Button
+                        Click="BtnVista_Click"
+                        Name="btnVista"
                         IsEnabled="False"
-                        ToolTip="Libro Diario">
+                        ToolTip="Vista">
                         <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
+                            Kind="FileDocumentBox" />
                     </Button>
                     <Button
+                        Click="Button_Click_1"
+                        Name="btnReportes"
                         IsEnabled="False"
-                        ToolTip="Reporte Diario">
+                        ToolTip="Reporte">
                         <materialDesign:PackIcon
-                            Kind="FileReport" />
+                            Kind="ChartAreasplineVariant" />
                     </Button>
                     <Separator/>
 

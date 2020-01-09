@@ -85,29 +85,26 @@
                         TabIndex="12"
                         Name="btn_vista"
                         Click="Btn_vista_Click"
-                        ToolTip="Update">
+                        ToolTip="Actualizar BD">
                         <materialDesign:PackIcon
-                            Kind="Refresh" />
-                    </Button>
-                    <Button
-                        IsEnabled="False"
-                        TabIndex="13"
-                        ToolTip="Nomenclatura SubCuentas">
-                        <materialDesign:PackIcon
-                            Kind="ViewList" />
-                    </Button>
+                            Kind="DatabaseRefresh" />
+                    </Button>                    
                     <Separator/>
                     <Button
+                        Click="BtnVista_Click"
+                        Name="btnVista"
                         IsEnabled="False"
                         TabIndex="14"
-                        ToolTip="Libro Diario">
+                        ToolTip="Vista">
                         <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
+                            Kind="FileDocumentBox" />
                     </Button>
                     <Button
+                        Click="BtnReporte_Click"
+                        Name="btnReporte"
                         IsEnabled="False"
                         TabIndex="15"
-                        ToolTip="Reporte Diario">
+                        ToolTip="Reporte">
                         <materialDesign:PackIcon
                             Kind="FileReport" />
                     </Button>

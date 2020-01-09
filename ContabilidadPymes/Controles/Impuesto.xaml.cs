@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -377,6 +379,8 @@ namespace ContabilidadPymes.Controles
             btn_buscar.IsEnabled = Estado;
             btn_refrescar.IsEnabled = Estado;
             btn_contribuyentes.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
+            btnReporte.IsEnabled = Estado;
         }
 
         public void BloqueoBusquedaTxt(bool Estado)
@@ -404,5 +408,17 @@ namespace ContabilidadPymes.Controles
         }
 
         #endregion
+
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasImpuestos vtnVistasImpuestos = new vtnVistasImpuestos();
+            vtnVistasImpuestos.Show();
+        }
+
+        private void BtnReporte_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesImpuestos vtnReportesImpuestos = new vtnReportesImpuestos();
+            vtnReportesImpuestos.Show();
+        }
     }
 }

@@ -78,28 +78,26 @@
                         IsEnabled="False"
                         Name="btn_refrescar"
                         Click="Btn_refrescar_Click"
-                        ToolTip="Nomenclatura Cuentas">
+                        ToolTip="Actualizar BD">
                         <materialDesign:PackIcon
-                            Kind="Refresh" />
-                    </Button>
-                    <Button
-                        IsEnabled="False"
-                        ToolTip="Nomenclatura SubCuentas">
-                        <materialDesign:PackIcon
-                            Kind="ViewList" />
+                            Kind="DatabaseRefresh" />
                     </Button>
                     <Separator/>
                     <Button
+                        Click="BtnVista_Click"
+                        Name="btnVista"
                         IsEnabled="False"
-                        ToolTip="Libro Diario">
+                        ToolTip="Vista">
                         <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
+                            Kind="FileDocumentBox" />
                     </Button>
                     <Button
+                        Click="BtnReporte_Click"
+                        Name="btnReporte"
                         IsEnabled="False"
-                        ToolTip="Reporte Diario">
+                        ToolTip="Reporte">
                         <materialDesign:PackIcon
-                            Kind="FileReport" />
+                            Kind="ChartAreasplineVariant" />
                     </Button>
                     <Separator/>
 

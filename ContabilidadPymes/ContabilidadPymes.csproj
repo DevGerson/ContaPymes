@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -88,6 +89,39 @@
     <Compile Include="Controles\Clientes.xaml.cs">
       <DependentUpon>Clientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcClientes.xaml.cs">
+      <DependentUpon>rptcClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcCompras.xaml.cs">
+      <DependentUpon>rptcCompras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcContribuyentes.xaml.cs">
+      <DependentUpon>rptcContribuyentes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcFacturasHabilitadas.xaml.cs">
+      <DependentUpon>rptcFacturasHabilitadas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcFacturasSeries.xaml.cs">
+      <DependentUpon>rptcFacturasSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcHabilitados.xaml.cs">
+      <DependentUpon>rptcHabilitados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcHonorarios.xaml.cs">
+      <DependentUpon>rptcHonorarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcImpuestos.xaml.cs">
+      <DependentUpon>rptcImpuestos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcPagos.xaml.cs">
+      <DependentUpon>rptcPagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcProveedor.xaml.cs">
+      <DependentUpon>rptcProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ControlReportesCrystal\rptcVentas.xaml.cs">
+      <DependentUpon>rptcVentas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controles\ControlReportes\FormatoReporte.xaml.cs">
       <DependentUpon>FormatoReporte.xaml</DependentUpon>
     </Compile>
@@ -133,6 +167,72 @@
     <Compile Include="Controles\ReportContribuyente.xaml.cs">
       <DependentUpon>ReportContribuyente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ReporteCrystalProveedor.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteCrystalProveedor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalClientes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalClientes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalCompras.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalCompras.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalContribuyentes.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalContribuyentes.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalFacturaHabilitados.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalFacturaHabilitados.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalFacturaSeries.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalFacturaSeries.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalHabilitacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalHabilitacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalHonorarios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalHonorarios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalImpuestos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalImpuestos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalPagos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalPagos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportesCrystalVentas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportesCrystalVentas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Ventanas\FacturaSeries.xaml.cs">
       <DependentUpon>FacturaSeries.xaml</DependentUpon>
     </Compile>
@@ -148,6 +248,72 @@
     <Compile Include="Ventanas\vtnReporteCompras.xaml.cs">
       <DependentUpon>vtnReporteCompras.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesClientes.xaml.cs">
+      <DependentUpon>vtnReportesClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesCompras.xaml.cs">
+      <DependentUpon>vtnReportesCompras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesContribuyentes.xaml.cs">
+      <DependentUpon>vtnReportesContribuyentes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesFacturasHabilitadas.xaml.cs">
+      <DependentUpon>vtnReportesFacturasHabilitadas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesFacturasSeries.xaml.cs">
+      <DependentUpon>vtnReportesFacturasSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesHabilitados.xaml.cs">
+      <DependentUpon>vtnReportesHabilitados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesHonorarios.xaml.cs">
+      <DependentUpon>vtnReportesHonorarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesImpuestos.xaml.cs">
+      <DependentUpon>vtnReportesImpuestos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesPagos.xaml.cs">
+      <DependentUpon>vtnReportesPagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesProveedor.xaml.cs">
+      <DependentUpon>vtnReportesProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnReportes\vtnReportesVentas.xaml.cs">
+      <DependentUpon>vtnReportesVentas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasClientes.xaml.cs">
+      <DependentUpon>vtnVistasClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasCompras.xaml.cs">
+      <DependentUpon>vtnVistasCompras.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasContribuyentes.xaml.cs">
+      <DependentUpon>vtnVistasContribuyentes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasFacturasHabilitadas.xaml.cs">
+      <DependentUpon>vtnVistasFacturasHabilitadas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasFacturasSeries.xaml.cs">
+      <DependentUpon>vtnVistasFacturasSeries.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasHabilitados.xaml.cs">
+      <DependentUpon>vtnVistasHabilitados.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasHonorarios.xaml.cs">
+      <DependentUpon>vtnVistasHonorarios.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasImpuestos.xaml.cs">
+      <DependentUpon>vtnVistasImpuestos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasPagos.xaml.cs">
+      <DependentUpon>vtnVistasPagos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasProveedor.xaml.cs">
+      <DependentUpon>vtnVistasProveedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Ventanas\vtnVistas\vtnVistasVentas.xaml.cs">
+      <DependentUpon>vtnVistasVentas.xaml</DependentUpon>
+    </Compile>
     <Page Include="Controles\Clientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -161,6 +327,50 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controles\Contribuyente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcCompras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcContribuyentes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcFacturasHabilitadas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcFacturasSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcHabilitados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcHonorarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcImpuestos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcPagos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controles\ControlReportesCrystal\rptcVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -323,6 +533,94 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesCompras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesContribuyentes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesFacturasHabilitadas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesFacturasSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesHabilitados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesHonorarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesImpuestos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesPagos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnReportes\vtnReportesVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasCompras.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasContribuyentes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasFacturasHabilitadas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasFacturasSeries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasHabilitados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasHonorarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasImpuestos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasPagos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasProveedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Ventanas\vtnVistas\vtnVistasVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -342,6 +640,50 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteCrystalProveedor.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteCrystalProveedor.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalClientes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalClientes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalCompras.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalCompras.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalContribuyentes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalContribuyentes.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalFacturaHabilitados.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalFacturaHabilitados.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalFacturaSeries.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalFacturaSeries.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalHabilitacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalHabilitacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalHonorarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalHonorarios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalImpuestos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalImpuestos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalPagos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalPagos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReportesCrystalVentas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportesCrystalVentas.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -354,6 +696,7 @@
   <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -57,25 +57,20 @@
                     </Button>
                     <Separator/>
                     <Button
-                        ToolTip="Nomenclatura Cuentas">
+                        ToolTip="Actualizar">
                         <materialDesign:PackIcon
-                            Kind="FormatListBulleted" />
-                    </Button>
-                    <Button
-                        ToolTip="Nomenclatura SubCuentas">
-                        <materialDesign:PackIcon
-                            Kind="ViewList" />
+                            Kind="DatabaseRefresh" />
                     </Button>
                     <Separator/>
                     <Button
-                        ToolTip="Libro Diario">
+                        ToolTip="Vista">
                         <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
+                            Kind="FileDocumentBox" />
                     </Button>
                     <Button
-                        ToolTip="Reporte Diario">
+                        ToolTip="Reporte">
                         <materialDesign:PackIcon
-                            Kind="FileReport" />
+                            Kind="ChartAreasplineVariant" />
                     </Button>
                     <Separator/>
 

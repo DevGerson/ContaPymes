@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
 using ContabilidadPymes.Ventanas;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -550,6 +552,8 @@ namespace ContabilidadPymes.Controles
         {
             btn_guardar.IsEnabled = Estado;
             btn_guardar2.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
+            btnReporte.IsEnabled = Estado;
         }
 
         public void ListTipos()
@@ -560,6 +564,18 @@ namespace ContabilidadPymes.Controles
             txt_tipoDoc.ItemsSource = classFacturasDetalles.ListTipos().Tables[0].DefaultView;
             txt_tipoDoc.DisplayMemberPath = "tipo_doc";
             txt_tipoDoc.SelectedValuePath = "tipo_doc";
+        }
+
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasVentas vtnVistasVentas = new vtnVistasVentas();
+            vtnVistasVentas.Show();
+        }
+
+        private void BtnReporte_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesVentas vtnReportesVentas = new vtnReportesVentas();
+            vtnReportesVentas.Show();
         }
 
         public void ListSeries()

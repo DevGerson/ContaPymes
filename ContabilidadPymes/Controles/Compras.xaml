@@ -84,31 +84,28 @@
                         Click="Button_Click"
                         TabIndex="15"
                         IsEnabled="False"
-                        ToolTip="Actualizar Reporte">
+                        ToolTip="Actualizar BD">
                         <materialDesign:PackIcon
-                            Kind="Refresh" />
-                    </Button>
-                    <Button
-                        TabIndex="16"
-                        IsEnabled="False"
-                        ToolTip="Nomenclatura SubCuentas">
-                        <materialDesign:PackIcon
-                            Kind="ViewList" />
+                            Kind="DatabaseRefresh" />
                     </Button>
                     <Separator/>
                     <Button
+                        Click="btnReporteCompras_Click"
+                        Name="ReporteCompras"
                         TabIndex="17"
                         IsEnabled="False"
-                        ToolTip="Libro Diario">
+                        ToolTip="Reporte Compras">
                         <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
+                            Kind="FileDocumentBox" />
                     </Button>
                     <Button
+                        Click="btnVistaCompras_Click"
+                        Name="btnVistaCompras"
                         TabIndex="18"
                         IsEnabled="False"
-                        ToolTip="Reporte Diario">
+                        ToolTip="Reporte">
                         <materialDesign:PackIcon
-                            Kind="FileReport" />
+                            Kind="ChartAreasplineVariant" />
                     </Button>
                     <Separator/>
 

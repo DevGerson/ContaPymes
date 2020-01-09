@@ -75,31 +75,33 @@
                         Click="Reporte_contribuyente_Click"
                         Name="reporte_contribuyente"
                         IsEnabled="False"
-                        ToolTip="Reporte Contribuyente">
+                        ToolTip="Actualizar">
                         <materialDesign:PackIcon
-                            Kind="ViewList" />
+                            Kind="DatabaseRefresh" />
+                    </Button>                    
+                    <Button
+                        Click="BtnVista_Click"
+                        Name="btnVista"
+                        IsEnabled="False"
+                        ToolTip="Vista">
+                        <materialDesign:PackIcon
+                            Kind="FileDocumentBox" />
                     </Button>
+                    <Button
+                        Click="BtnReporte_Click"
+                        Name="btnReporte"
+                        IsEnabled="False"
+                        ToolTip="Reportes">
+                        <materialDesign:PackIcon
+                            Kind="ChartAreasplineVariant" />
+                    </Button>                    
+                    <Separator/>
                     <Button
                         IsEnabled="False"
                         ToolTip="Nomenclatura Cuentas">
                         <materialDesign:PackIcon
                             Kind="InfoVariant" />
                     </Button>
-                    <Separator/>
-                    <Button
-                        IsEnabled="False"
-                        ToolTip="Libro Diario">
-                        <materialDesign:PackIcon
-                            Kind="ChartAreasplineVariant" />
-                    </Button>
-                    <Button
-                        IsEnabled="False"
-                        ToolTip="Reporte Diario">
-                        <materialDesign:PackIcon
-                            Kind="FileReport" />
-                    </Button>
-                    <Separator/>
-
                 </ToolBar>
             </ToolBarTray>
         </Grid>

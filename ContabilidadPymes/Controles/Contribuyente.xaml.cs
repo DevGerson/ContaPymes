@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
 using ContabilidadPymes.Ventanas;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -394,6 +396,8 @@ namespace ContabilidadPymes.Controles
             btn_editar.IsEnabled = Estado;
             buscar.IsEnabled = Estado;
             reporte_contribuyente.IsEnabled = Estado;
+            btnReporte.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
         }
 
         public void BloqueoBtnBusqueda(bool Estado)
@@ -413,5 +417,17 @@ namespace ContabilidadPymes.Controles
         }
 
         #endregion
+
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasContribuyentes vtnVistasContribuyentes = new vtnVistasContribuyentes();
+            vtnVistasContribuyentes.Show();
+        }
+
+        private void BtnReporte_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesContribuyentes vtnReportesContribuyentes = new vtnReportesContribuyentes();
+            vtnReportesContribuyentes.Show();
+        }
     }
 }

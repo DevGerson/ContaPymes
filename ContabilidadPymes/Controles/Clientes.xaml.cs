@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -209,6 +211,8 @@ namespace ContabilidadPymes.Controles
             btnGuardar.IsEnabled = Estado;
             btnGuardar2.IsEnabled = Estado;
             btnRefrescar.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
+            btnReporte.IsEnabled = Estado;
         }
 
         public void BloqueoBtnBusqueda(bool Estado)
@@ -320,6 +324,18 @@ namespace ContabilidadPymes.Controles
         private void BtnGuardar_Click(object sender, RoutedEventArgs e)
         {
             ValidacionIngresar();
+        }
+
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasClientes vtnVistasClientes = new vtnVistasClientes();
+            vtnVistasClientes.Show();
+        }
+
+        private void BtnReporte_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesClientes vtnReportesClientes = new vtnReportesClientes();
+            vtnReportesClientes.Show();
         }
     }
 }

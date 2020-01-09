@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ContabilidadPymes.Clases;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 
 namespace ContabilidadPymes.Controles
@@ -360,6 +362,8 @@ namespace ContabilidadPymes.Controles
             btn_buscar.IsEnabled = Estado;
             btn_vista.IsEnabled = Estado;
             btn_contribuyentes.IsEnabled = Estado;
+            btnReporte.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
         }
 
         public void CargarComboContribuyentes()
@@ -384,6 +388,18 @@ namespace ContabilidadPymes.Controles
         {
             string d = combo_nit.SelectedValue.ToString();
             classMensajes.MensajesCortos("NIT", d);
+        }
+
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasHabilitados vtnVistasHabilitados = new vtnVistasHabilitados();
+            vtnVistasHabilitados.Show();
+        }
+
+        private void BtnReporte_Click(object sender, RoutedEventArgs e)
+        {
+            vtnReportesHabilitados vtnReportesHabilitados = new vtnReportesHabilitados();
+            vtnReportesHabilitados.Show();
         }
 
         public void BloqueoBtnGuardar(bool Estado)

@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using ContabilidadPymes.Ventanas;
 using ContabilidadPymes.Clases;
 using ContabilidadPymes.Controles;
+using ContabilidadPymes.Ventanas.vtnReportes;
+using ContabilidadPymes.Ventanas.vtnVistas;
 
 namespace ContabilidadPymes.Controles
 {
@@ -215,6 +217,17 @@ namespace ContabilidadPymes.Controles
             validaciones.ValidacionNumeroDeFacturas(e);
         }
 
+        private void BtnVista_Click(object sender, RoutedEventArgs e)
+        {
+            vtnVistasFacturasHabilitadas vtnVistasFacturasHabilitadas = new vtnVistasFacturasHabilitadas();
+            vtnVistasFacturasHabilitadas.Show();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            vtnReportesFacturasHabilitadas vtnReportesFacturasHabilitadas = new vtnReportesFacturasHabilitadas();
+            vtnReportesFacturasHabilitadas.Show();
+        }
         #endregion
 
         #region Funciones
@@ -264,6 +277,8 @@ namespace ContabilidadPymes.Controles
             btn_seriesRegistradas.IsEnabled = Estado;
             btn_guardar.IsEnabled = Estado;
             btn_List.IsEnabled = Estado;
+            btnVista.IsEnabled = Estado;
+            btnReportes.IsEnabled = Estado;
         }
 
         public void BloqueoBtnBusqueda(bool Estado)
@@ -477,5 +492,7 @@ namespace ContabilidadPymes.Controles
 
 
         #endregion
+
+
     }
 }
