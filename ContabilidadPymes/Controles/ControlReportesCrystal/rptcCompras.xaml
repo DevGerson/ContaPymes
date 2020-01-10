@@ -82,6 +82,7 @@
                         Margin="0 10 0 0"/>
                 </StackPanel>
                 <Button
+                    Click="BtnActualizar_Click"
                         TabIndex="5"
                         IsEnabled="True"
                         Name="btnActualizar"
@@ -98,8 +99,8 @@
         </Grid>
         
         <Grid Grid.Column="1">
-        
-            <Viewer:CrystalReportsViewer Background="WhiteSmoke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ShowLogo="False" ShowToggleSidePanelButton="False"/>
+
+            <Viewer:CrystalReportsViewer  ToggleSidePanel="None" Name="ReporteCrystal" Background="WhiteSmoke" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ShowLogo="False" ShowToggleSidePanelButton="False"/>
             
         </Grid>
         

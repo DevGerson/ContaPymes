@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace ContabilidadPymes.Controles.ControlReportesCrystal
         public rptcProveedor()
         {
             InitializeComponent();
+        }
+
+        private void BtnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            Actualizar();
+        }
+
+
+        public void Actualizar()
+        {
+            ReportDocument report = new ReportDocument();
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "\\ReporteCrystalProveedor.rpt";
+
+            report.Load(path);
+            ReporteCrystal.ViewerCore.ReportSource = report;
         }
     }
 }

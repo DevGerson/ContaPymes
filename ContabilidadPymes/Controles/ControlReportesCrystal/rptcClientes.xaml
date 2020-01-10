@@ -21,6 +21,7 @@
                 <TextBlock Margin="0 10 0 0" TextAlignment="Center" FontSize="20" FontWeight="SemiBold"><Run Text="Reporte Clientes"/></TextBlock>
                 <StackPanel Margin="20 20"/>
                 <Button
+                    Click="BtnActualizar_Click"
                         TabIndex="5"
                         IsEnabled="True"
                         x:Name="btnActualizar"
@@ -34,7 +35,7 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1">
-            <Viewer:CrystalReportsViewer Background="WhiteSmoke" ShowLogo="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Viewer:CrystalReportsViewer Name="ReporteCrystal" Background="WhiteSmoke" ShowLogo="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         </Grid>
     </Grid>

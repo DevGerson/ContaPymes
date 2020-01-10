@@ -473,7 +473,7 @@ namespace ContabilidadPymes.Controles
 
         private void btnReporteCompras_Click(object sender, RoutedEventArgs e)
         {
-            vtnReportesCompras vtnReportesCompras = new vtnReportesCompras();
+            vtnReportesCompras vtnReportesCompras = new vtnReportesCompras(combo_razon.SelectedValue.ToString(),combo_razon.Text);
             vtnReportesCompras.Show();
         }
 

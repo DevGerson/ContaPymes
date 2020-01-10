@@ -81,6 +81,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Clases\ClassClientes.cs" />
+    <Compile Include="Clases\ClassConvertidoFechas.cs" />
     <Compile Include="Clases\ClassFacturas.cs" />
     <Compile Include="Clases\ClassFiltros.cs" />
     <Compile Include="Clases\ClassMensajes.cs" />

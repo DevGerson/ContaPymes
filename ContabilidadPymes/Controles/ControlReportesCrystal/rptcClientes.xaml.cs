@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CrystalDecisions.CrystalReports.Engine;
+using ContabilidadPymes.Reportes;
 
 namespace ContabilidadPymes.Controles.ControlReportesCrystal
 {
@@ -23,6 +25,20 @@ namespace ContabilidadPymes.Controles.ControlReportesCrystal
         public rptcClientes()
         {
             InitializeComponent();
+        }
+
+        public void Actualizar()
+        {
+            ReportDocument report = new ReportDocument();
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "\\ReportesCrystalClientes.rpt";
+
+            report.Load(path);
+            ReporteCrystal.ViewerCore.ReportSource = report;
+        }
+
+        private void BtnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+            Actualizar();
         }
     }
 }
